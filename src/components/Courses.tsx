@@ -42,7 +42,7 @@ function Courses() {
             <h2>{course.title}</h2>
             <h2>{course.description}</h2>
             <h2>{course.price}</h2>
-            <img src={course.imageLink} alt="" />
+            <img src={`http://localhost:3000/${course.imageLink}`} alt="" className="course-img" />
             </div>
           </Link>
         );
