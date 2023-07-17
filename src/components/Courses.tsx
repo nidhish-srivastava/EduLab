@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCourseContext } from "../context/context";
 
-type courseType = {
+export type courseType = {
   title : string
   imageLink : string
   description : string
