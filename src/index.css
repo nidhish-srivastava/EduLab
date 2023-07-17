@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  line-height: 1.5;
+  margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6,p{
+  margin: 0;
+}
+ 
+.main-app-container{
+  width: 100vw;
+  height: 100vh;
+  background-color: #eeeeee;
+}
+
+.nav-bar{
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+img{
+  display: block;
+  width: 100%;
+}
+
+.courses-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(min(9rem,100%),1fr));
+  gap: 1rem;
+}
+
+.course-card{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  /* width: calc(100%/3 - 3rem); */
+}
