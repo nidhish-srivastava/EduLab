@@ -9,6 +9,7 @@ import SignUp from './components/SignUp'
 import Courses from './components/Courses'
 import Course from './components/Course'
 import AddCourse from './components/AddCourse'
+import UpdateCourse from './components/UpdateCourse'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path='/courses' element = {<Courses/>} />
       <Route path='/courses/:courseId' element = {<Course/>} />
       <Route path='/addcourse' element = {<AddCourse/>} />
+      <Route path='/update-course/:courseId' element = {<UpdateCourse/>} />
     </Routes>
     </BrowserRouter>
     </div>

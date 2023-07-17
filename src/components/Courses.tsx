@@ -14,6 +14,8 @@ function Courses() {
   const final = useCourseContext()
   const [coursesArray, setCoursesArray] = useState([]);
   const fetchData = async () => {
+    try {
+      
     const response = await fetch(`http://localhost:3000/admin/courses/${final?.userEmail}`, {
       method : "GET",
       headers: {
@@ -22,10 +24,13 @@ function Courses() {
     });
     const data = await response.json();
     setCoursesArray(data.courses);
+    } catch (error) {
+
+    }
   };
   
   useEffect(() => {
-    fetchData()
+      fetchData()
   }, [])
   
   return (

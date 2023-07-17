@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { courseType } from "./Courses"
 import axios from "axios"
+import { useCourseContext } from "../context/context"
 
 function Course() {
   const {courseId} = useParams() 
-  const [course,setCourse] = useState<courseType>()
+  const final = useCourseContext()
   const navigate = useNavigate()
 
   const fetchCourse = async()=>{
@@ -15,8 +15,7 @@ function Course() {
       }
     })
     console.log(response.data);
-    
-    setCourse(response.data.course)
+    final?.setCourse(response.data.course)
   }
 
   const deleteHandler = async() =>{
@@ -32,14 +31,15 @@ function Course() {
   useEffect(()=>{
       fetchCourse()
   },[])
+
   return (
     <div>
-      <h2>{course?.title}</h2>
-      <h2>{course?.description}</h2>
-      <h2>{course?.price}</h2>
-      <img src={course?.imageLink} alt="" />
+      <h2>{final?.course?.title}</h2>
+      <h2>{final?.course?.description}</h2>
+      <h2>{final?.course?.price}</h2>
+      <img src={final?.course?.imageLink} alt="" />
       <button onClick={deleteHandler} >Delete</button>
-      <button>Update</button>
+      <button onClick={()=>navigate(`/update-course/${courseId}`)} >Update</button>
     </div>
   )
 }
