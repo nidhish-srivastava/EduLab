@@ -26,6 +26,7 @@ function Navbar() {
         <h3>Logo</h3>
         <Link to={`/`}>Home</Link>
         <Link to={`/instructor`}>Instructor</Link>
+        <button>Cart{" (0) "}</button>
         <button
           onClick={() => {
             localStorage.setItem("token", "");

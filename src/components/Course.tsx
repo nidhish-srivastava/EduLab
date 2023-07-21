@@ -37,6 +37,7 @@ function Course() {
       <h2>{final?.course?.title}</h2>
       <h2>{final?.course?.description}</h2>
       <h2>{final?.course?.price}</h2>
+      <h2>{final?.course?.author}</h2>
       <img src={final?.course?.imageLink} alt="" />
       <button onClick={deleteHandler} >Delete</button>
       <button onClick={()=>navigate(`/instructor/update-course/${courseId}`)} >Update</button>

@@ -1,14 +1,21 @@
 import { useState,ChangeEvent } from "react"
+import { useCourseContext } from "../context/context"
 
 type FileType = File | undefined
 
+type categoriesArrayType = {
+    category : string
+    subCategory : string[]
+}[]
+
 function CreateCourse() {
+  const final = useCourseContext()
   const [title,setTitle] = useState("")
   const [description,setDescription] = useState("")
   const [file,setFile] = useState<FileType | any>(undefined)
   const [price,setPrice] = useState("")
   const [category,setCategory] = useState(0)
-  const categories = [
+  const categories : categoriesArrayType = [
     {
       category : "Development",subCategory : ["Web Development","Data Science","Mobile Development","Game Developpment"]
     },{
@@ -35,6 +42,7 @@ function CreateCourse() {
     formData.set("description",description)
     formData.set("file",file)
     formData.set("price",price)
+    formData.set("author",String(final?.userEmail))
 
      await fetch(`http://localhost:3000/admin/create-course`,{
       method: "POST",

@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useCourseContext } from "../context/context";
+import CourseResultCard from "./CourseResultCard";
 
 export type courseType = {
   title : string
@@ -8,6 +8,7 @@ export type courseType = {
   description : string
   price : number
   _id ?: number
+  author?: string
 }
 
 function MyCourses() {
@@ -34,20 +35,16 @@ function MyCourses() {
   }, [])
   
   return (
+    <>
+      <h2>Hello {final?.userEmail}</h2>
     <div className="courses-container">
       {coursesArray?.map((course : courseType) => {
         return (
-          <Link to={`${course._id}`}>
-            <div className="course-card">
-            <img src={`http://localhost:3000/${course.imageLink}`} alt="" className="course-img" />
-            <h2>Title:{course.title}</h2>
-            <h2>Desc:{course.description}</h2>
-            <h2>Price:{course.price}</h2>
-            </div>
-          </Link>
-        );
-      })}
+         <CourseResultCard course={course} />
+         );
+        })}
     </div>
+        </>
   );
 }
 

@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { useCourseContext } from "../context/context"
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 function UpdateCourse() {
   const {courseId} = useParams()
-  
+  const navigate = useNavigate()
     const final = useCourseContext()
     const [title,setTitle] = useState(final?.course?.title)
     const [description,setDescription] = useState(final?.course?.description)
@@ -24,6 +24,7 @@ function UpdateCourse() {
         bodyContent
       })
       alert('Updated Successfully')
+      navigate('/instructor/my-courses')
     }
 
   return (
