@@ -6,10 +6,12 @@ import {
 import Navbar from './components/Navbar'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
-import Courses from './components/Courses'
+import MyCourses from './components/MyCourses'
 import Course from './components/Course'
-import AddCourse from './components/AddCourse'
+import CreateCourse from './components/CreateCourse'
 import UpdateCourse from './components/UpdateCourse'
+import Courses from './components/Courses'
+import Instructor from './components/Instructor'
 
 function App() {
   return (
@@ -19,10 +21,14 @@ function App() {
     <Routes>
       <Route path='/signin' element = {<SignIn/>} /> 
       <Route path='/signup' element = {<SignUp/>} />
-      <Route path='/courses' element = {<Courses/>} />
-      <Route path='/courses/:courseId' element = {<Course/>} />
-      <Route path='/addcourse' element = {<AddCourse/>} />
-      <Route path='/update-course/:courseId' element = {<UpdateCourse/>} />
+      <Route path='/' element = {<Courses/>} />
+      {/* <Route path='/:courseId' element = {<Course/>} /> */}
+
+      <Route path='/instructor' element = {<Instructor/>} />
+      <Route path='/instructor/my-courses' element = {<MyCourses/>} />
+      <Route path='/instructor/create-course' element = {<CreateCourse/>} />
+      <Route path='/instructor/my-courses/:courseId' element = {<Course/>} />
+      <Route path='/instructor/update-course/:courseId' element = {<UpdateCourse/>} />
     </Routes>
     </BrowserRouter>
     </div>

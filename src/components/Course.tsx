@@ -25,7 +25,7 @@ function Course() {
       }
     })
     alert(response.data)
-    navigate('/courses')
+    navigate('/instructor')
   }
 
   useEffect(()=>{
@@ -39,7 +39,7 @@ function Course() {
       <h2>{final?.course?.price}</h2>
       <img src={final?.course?.imageLink} alt="" />
       <button onClick={deleteHandler} >Delete</button>
-      <button onClick={()=>navigate(`/update-course/${courseId}`)} >Update</button>
+      <button onClick={()=>navigate(`/instructor/update-course/${courseId}`)} >Update</button>
     </div>
   )
 }

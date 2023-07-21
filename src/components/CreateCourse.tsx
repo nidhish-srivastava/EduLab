@@ -2,11 +2,24 @@ import { useState,ChangeEvent } from "react"
 
 type FileType = File | undefined
 
-function AddCourse() {
+function CreateCourse() {
   const [title,setTitle] = useState("")
   const [description,setDescription] = useState("")
   const [file,setFile] = useState<FileType | any>(undefined)
   const [price,setPrice] = useState("")
+  const [category,setCategory] = useState(0)
+  const categories = [
+    {
+      category : "Development",subCategory : ["Web Development","Data Science","Mobile Development","Game Developpment"]
+    },{
+      category : "Business",subCategory : ["Entreprenurship","Communication","Management","Sales","Business Strategy"]
+    },{
+      category : "Photography & Video",subCategory : ["Digital Photography","Potrait Photography","Video Design","Photography Tools"]
+    },
+    {
+      category : "Engineering",subCategory : ["Engineering","Humanities","Math","Science","Sociol Science"]
+    }
+  ]
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>)=>{
     const files = e.target.files;
@@ -23,7 +36,7 @@ function AddCourse() {
     formData.set("file",file)
     formData.set("price",price)
 
-     await fetch(`http://localhost:3000/admin/courses`,{
+     await fetch(`http://localhost:3000/admin/create-course`,{
       method: "POST",
       body: formData,
       credentials: 'include'
@@ -41,9 +54,23 @@ function AddCourse() {
         onChange={handleFileChange}
       />
       <input type="text" placeholder="Price" required onChange={e=>setPrice(e.target.value)} value={price} />
+      <select value={category} onChange={e=>setCategory(+e.target.value)} >
+        {categories.map((e,i)=>(
+          <option value={i}>{e.category}</option>
+        ))}
+      </select>
+      <select>
+        {
+          categories[category].subCategory.map(e=>{
+            return(
+              <option>{e}</option>
+            )
+          })
+        }
+      </select>
       <button>Submit</button>
     </form>
   )
 }
 
-export default AddCourse
+export default CreateCourse

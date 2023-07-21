@@ -43,5 +43,10 @@ img{
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  /* width: calc(100%/3 - 3rem); */
+  outline: 4px solid hotpink;
+  width: calc(100%/3 - 3rem);
+}
+
+.course-card img{
+  width: 30%;
 }

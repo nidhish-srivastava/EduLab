@@ -1,5 +1,5 @@
 import {createContext,useContext,useState} from 'react'
-import { courseType } from '../components/Courses'
+import { courseType } from '../components/MyCourses'
 
 type CourseContextType = {
     userEmail : string
