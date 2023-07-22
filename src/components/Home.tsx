@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { courseType } from "./MyCourses"
 import CourseResultCard from "./CourseResultCard"
 
-function Courses() {
+function Home() {
   const [data,setData] = useState([])
 
   const fetchPosts = async() =>{  //* No need to pas headers since aint using jwt auth
@@ -24,4 +24,4 @@ function Courses() {
   )
 }
 
-export default Courses
+export default Home

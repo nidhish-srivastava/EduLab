@@ -20,32 +20,33 @@ function Navbar() {
     check();
   }, []);
 
-  if (final?.userEmail && final.userEmail.length > 1) {
-    return (
-      <div className="nav-bar">
-        <h3>Logo</h3>
-        <Link to={`/`}>Home</Link>
-        <Link to={`/instructor`}>Instructor</Link>
-        <button>Cart{" (0) "}</button>
-        <button
-          onClick={() => {
-            localStorage.setItem("token", "");
-            window.location.href = "/";
-          }}
-        >
-          logout
-        </button>
-      </div>
-    );
-  } else {
-    return (
-      <div className="nav-bar">
-        <h3>Logo</h3>
-        <Link to={`/signup`}>SignUp</Link>
-        <Link to={`/signin`}>SignIn</Link>
-      </div>
-    );
-  }
+  return (
+    <div className="nav-bar">
+      <h3>Edulab</h3>
+      <input type="search" placeholder="Search Items" />
+      {final?.userEmail && final.userEmail.length > 1 ? (
+        <>
+          <Link to={`/instructor`}>Instructor</Link>
+          <Link to={`/`}>Home</Link>
+          <button>Cart{" (0) "}</button>
+          <button
+            onClick={() => {
+              localStorage.setItem("token", "");
+              window.location.href = "/";
+            }}
+          >
+            logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link to={`/signup`}>SignUp</Link>
+          <Link to={`/signin`}>SignIn</Link>
+        </>
+      )}
+      <Link to={`/edulab-business`}>Edulab Business</Link>
+    </div>
+  );
 }
 
 export default Navbar;
