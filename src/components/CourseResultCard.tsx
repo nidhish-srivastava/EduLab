@@ -1,4 +1,4 @@
-import { courseType } from "./MyCourses"
+import { courseType } from "./CreatingCourses/MyCourses"
 import { Link } from "react-router-dom"
 
 type CourseResultCardProp = {

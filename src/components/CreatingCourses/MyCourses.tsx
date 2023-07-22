@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
-import { useCourseContext } from "../context/context";
-import CourseResultCard from "./CourseResultCard";
+import { useCourseContext } from "../../context/context";
+import CourseResultCard from "../CourseResultCard";
 
 export type courseType = {
   title : string

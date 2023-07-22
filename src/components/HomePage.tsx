@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { courseType } from "./MyCourses"
+import { courseType } from "./CreatingCourses/MyCourses"
 import CourseResultCard from "./CourseResultCard"
 
 function Home() {

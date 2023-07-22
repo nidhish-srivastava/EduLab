@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useCourseContext } from "../context/context"
+import { useCourseContext } from "../../context/context"
 import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -9,7 +9,7 @@ function UpdateCourse() {
     const final = useCourseContext()
     const [title,setTitle] = useState(final?.course?.title)
     const [description,setDescription] = useState(final?.course?.description)
-    const [image,setImage] = useState(final?.course?.imageLink)
+    const [image,_] = useState(final?.course?.imageLink)
     const [price,setPrice] = useState(final?.course?.price)
 
     const updatehandler = async() =>{

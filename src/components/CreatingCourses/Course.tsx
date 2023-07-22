@@ -1,7 +1,7 @@
 import { useEffect} from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
-import { useCourseContext } from "../context/context"
+import { useCourseContext } from "../../context/context"
 
 function Course() {
   const {courseId} = useParams() 

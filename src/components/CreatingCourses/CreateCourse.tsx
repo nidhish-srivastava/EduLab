@@ -1,5 +1,5 @@
 import { useState,ChangeEvent } from "react"
-import { useCourseContext } from "../context/context"
+import { useCourseContext } from "../../context/context"
 
 type FileType = File | undefined
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
-import { courseType } from "./MyCourses";
+import { courseType } from "./CreatingCourses/MyCourses";
 
 function HomePageCourse() {
   const { courseId } = useParams();
