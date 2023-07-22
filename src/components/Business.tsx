@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useRef, useState } from "react";
+import RegisterResponse from "./RegisterResponse";
+import { useLocation } from "react-router-dom";
 function Business() {
+  // let location  = useLocation().pathname
+  // console.log(location.replace("/",""));
+  const [show,setShow] = useState(false)
+  
   const JobTitle = [
     "C-Level",
     "VP",
@@ -235,12 +241,14 @@ function Business() {
       country,
       companySize,
     };
-    const response = await axios.post(`http://localhost:3000`,formData)
+    const response = await axios.post(`http://localhost:3000/business`,formData)
     console.log(response.data);
     alert("Form submitted");
+    setShow(true)
   };
   return (
     <>
+    <h1>EduLab Business</h1>
       <div>
         <h2>Get your demo</h2>
         <p>
@@ -256,20 +264,21 @@ function Business() {
           functionality
         </p>
       </div>
-      <form onSubmit={submitHandler}>
+      { !show ? 
+        <form onSubmit={submitHandler}>
         <input
           type="text"
           placeholder="First Name*"
           autoFocus={true}
           ref={firstName}
-        />
+          />
         <input type="text" placeholder="Last Name*" required ref={lastName} />
         <input
           type="email"
           placeholder="Work Email*"
           required
           ref={workEmail}
-        />
+          />
         <input
           type="tel"
           placeholder="Mobile Number"
@@ -281,7 +290,7 @@ function Business() {
           placeholder="Company Name*"
           required
           ref={companyName}
-        />
+          />
         <input type="text" placeholder="Job Title*" required ref={jobTitle} />
         <select value={jobLevel} onChange={(e) => setJobLevel(e.target.value)}>
           <option value="" disabled selected>
@@ -306,16 +315,17 @@ function Business() {
         <select
           value={companySize}
           onChange={(e) => setCompanySize(e.target.value)}
-        >
+          >
           <option value="" disabled selected>
             Company Size*
           </option>
           {CompanySize.map((e: string, i) => (
             <option value={i}>{e}</option>
-          ))}
+            ))}
         </select>
         <button>Get in Touch</button>
-      </form>
+      </form> : <RegisterResponse/>
+  }
     </>
   );
 }

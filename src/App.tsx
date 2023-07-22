@@ -14,8 +14,10 @@ import Home from './components/Home'
 import Instructor from './components/Instructor'
 import HomePageCourse from './components/HomePageCourse'
 import Business from './components/Business'
+import { useState } from 'react'
 
 function App() {
+  const [show,setShow] = useState(false)
   return (
     <div className='main-app-container'>
     <BrowserRouter>
