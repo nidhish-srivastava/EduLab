@@ -12,7 +12,8 @@ function Navbar() {
       },
     });
     const data = await response.json();
-
+    console.log(data);
+    
     final?.setUserEmail(data.username);
   };
 
@@ -22,29 +23,36 @@ function Navbar() {
 
   return (
     <div className="nav-bar">
-      <h3>Edulab</h3>
-      <input type="search" placeholder="Search Items" />
+      <span className="logo">
+      EduLab
+      </span>
       {final?.userEmail && final.userEmail.length > 1 ? (
         <>
-          <Link to={`/instructor`}>Instructor</Link>
           <Link to={`/`}>Home</Link>
-          <button>Cart{" (0) "}</button>
-          <button
+          <Link to={`/instructor`}>Instructor</Link>
+       
+          {/* <button>Cart{" (0) "}</button> */}
+          <button className="logout-btn"
             onClick={() => {
               localStorage.setItem("token", "");
               window.location.href = "/";
             }}
           >
-            logout
+            Logout
           </button>
         </>
       ) : (
-        <>
+        <div className="sign-in-row">
+      <span className="business-logo">
+        <Link to={`/edulab-business`}>
+          Edulab Business
+          </Link>
+      </span>
+          <input type="search" placeholder="Tap Here to Search" className="search-bar" />
           <Link to={`/signup`}>SignUp</Link>
           <Link to={`/signin`}>SignIn</Link>
-        </>
+        </div>
       )}
-      <Link to={`/edulab-business`}>Edulab Business</Link>
     </div>
   );
 }

@@ -21,12 +21,16 @@ function SignUp() {
         else alert("Password not matching")
     }
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="form">
         <input required autoFocus = {true} placeholder="username" type="text" onChange={e=>setUsername(e.target.value)} value={username} />
-        <span onClick={()=>setShow(e=>!e)} >Show</span>
+        <div className="password-input">
         <input required type={show ? "text" : "password"} placeholder="password" value={password} onChange={e=>setPassword(e.target.value)} />
+        <span onClick={()=>setShow(e=>!e)} className="show-name" >
+        <i className="fa-solid fa-virus"></i>
+        </span>
+        </div>
         <input required type={show ? "text" : "password"} placeholder="re-enter password" onChange={e=>setConfirmPassword(e.target.value)} />
-        <button>SignUp</button>
+        <button className="form-submit-btn" >SignUp</button>
     </form>
   )
 }

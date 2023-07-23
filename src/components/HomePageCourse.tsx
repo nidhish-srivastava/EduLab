@@ -2,9 +2,11 @@ import axios from "axios";
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
+import { useCourseContext } from "../context/context";
 
 function HomePageCourse() {
   const { courseId } = useParams();
+  const final = useCourseContext()
   const [courseObject,setCourseObject] = useState<courseType>()
   const fetchCourse = async () => {
     const response = await axios.get(
@@ -17,13 +19,23 @@ function HomePageCourse() {
     fetchCourse();
   }, []);
 
-  return <div className="home-page-course-card">
-    <h2>{courseObject?.title}</h2>
-    <p>{courseObject?.description}</p>
+  return <div className="individual-course-card-home-page">
+    <div className="image-wrapper">
     <img src={`http://localhost:3000/${courseObject?.imageLink}`} alt="" />
-    <h2>{courseObject?.price}</h2>
+    </div>
+    <div className="right-side">
+      <div>
+    <h1>{courseObject?.title}</h1>
+    <p>{courseObject?.description}</p>
+      </div>
+      <div>
+    <h2>&#8377;{courseObject?.price}</h2>
+    <div className="buy-btn-row">
     <button>Buy Now</button>
     <button>Add to Cart</button>
+    </div>
+      </div>
+    </div>
   </div>;
 }
 

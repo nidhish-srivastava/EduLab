@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import a from './1.jpg'
 function Instructor() {
   return (
-    <div>
+    <>
+    <div className="btn-row">
       <Link to={`my-courses`}>
         <button>
         My Courses
@@ -13,6 +15,10 @@ function Instructor() {
         </button>
       </Link>
     </div>
+    <div className="image-wrapper-create">
+    <img src={a} alt=""  />
+    </div>
+    </>
   );
 }
 

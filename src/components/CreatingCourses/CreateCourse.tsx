@@ -1,5 +1,6 @@
 import { useState,ChangeEvent } from "react"
 import { useCourseContext } from "../../context/context"
+import { useNavigate } from "react-router-dom"
 
 type FileType = File | undefined
 
@@ -9,6 +10,7 @@ type categoriesArrayType = {
 }[]
 
 function CreateCourse() {
+  const navigate = useNavigate()
   const final = useCourseContext()
   const [title,setTitle] = useState("")
   const [description,setDescription] = useState("")
@@ -50,18 +52,21 @@ function CreateCourse() {
       credentials: 'include'
     })
     alert("Added course!")
+    navigate('/')
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <input type="text" placeholder="title" required autoFocus={true} onChange={e=>setTitle(e.target.value)} value={title} />
-      <input type="text" placeholder="description" required onChange={e=>setDescription(e.target.value)} value={description} />
+    <form onSubmit={submitHandler} className="update-container">
+      <input type="text" placeholder="Give a Title" required autoFocus={true} onChange={e=>setTitle(e.target.value)} value={title} />
+      <textarea rows={3} cols={50} placeholder="Describe your Course" required onChange={e=>setDescription(e.target.value)} value={description} />
+      <input  type="text" placeholder="Set price" required onChange={e=>setPrice(e.target.value)} value={price} />
       <input
         required
         type="file"
         onChange={handleFileChange}
       />
-      <input type="text" placeholder="Price" required onChange={e=>setPrice(e.target.value)} value={price} />
+      <div className="dropdown-row">
+        <label htmlFor="">Choose Category : </label>
       <select value={category} onChange={e=>setCategory(+e.target.value)} >
         {categories.map((e,i)=>(
           <option value={i}>{e.category}</option>
@@ -72,10 +77,11 @@ function CreateCourse() {
           categories[category].subCategory.map(e=>{
             return(
               <option>{e}</option>
-            )
-          })
-        }
+              )
+            })
+          }
       </select>
+          </div>
       <button>Submit</button>
     </form>
   )

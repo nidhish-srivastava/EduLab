@@ -33,14 +33,23 @@ function Course() {
   },[])
 
   return (
-    <div>
-      <h2>{final?.course?.title}</h2>
-      <h2>{final?.course?.description}</h2>
-      <h2>{final?.course?.price}</h2>
-      <h2>{final?.course?.author}</h2>
-      <img src={final?.course?.imageLink} alt="" />
+      <div className="individual-course-card-home-page">
+    <div className="image-wrapper">
+    <img src={`http://localhost:3000/${final?.course?.imageLink}`} alt="" />
+    </div>
+    <div className="right-side">
+      <div>
+    <h1>{final?.course?.title}</h1>
+    <p>{final?.course?.description}</p>
+      </div>
+      <div>
+    <h2>&#8377;{final?.course?.price}</h2>
+    <div className="edit-btn-row">
       <button onClick={deleteHandler} >Delete</button>
       <button onClick={()=>navigate(`/instructor/update-course/${courseId}`)} >Update</button>
+      </div>
+    </div>
+    </div>
     </div>
   )
 }

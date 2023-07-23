@@ -1,60 +1,342 @@
-*{
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
   box-sizing: border-box;
 }
 
-body{
+body {
   line-height: 1.5;
   margin: 0;
 }
 
-h1,h2,h3,h4,h5,h6,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
- 
-.main-app-container{
+
+.main-app-container {
   width: 100vw;
   height: 100vh;
   background-color: #eeeeee;
 }
 
-.nav-bar{
+/* NAVBAR */
+.nav-bar {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   padding: 1rem;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.2);
 }
 
-a{
+.nav-bar a {
+  font-size: 1.2rem;
+}
+
+.sign-in-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.sign-in-row a {
+  background-color: #1463cb;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 1rem;
+  border: none;
+  font-size: 1.1rem;
+}
+
+.search-bar {
+  padding: 0.5rem 0.7rem;
+  border-radius: 1rem;
+  border: none;
+  width: 23%;
+  font-size: 1.03rem;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #2951c7, #ffae00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.business-logo {
+  margin-right: auto;
+}
+.business-logo a {
+  display: flex;
+  align-items: center;
+  /* font-size: 1.3rem; */
+  background-color: lightgreen;
+  color: black;
+}
+
+.logout-btn {
+  margin-left: auto;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+
+a {
   text-decoration: none;
   color: inherit;
 }
 
-img{
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 5rem;
+}
+
+.form input {
+  font-family: "Poppins", sans-serif;
+  padding: 0.71rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.01rem;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.password-input {
+  position: relative;
+}
+
+.show-name {
+  position: absolute;
+  cursor: pointer;
+  padding: 0.71rem 0.31rem;
+}
+
+.form-submit-btn {
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #b0a9f1;
+  font-size: 1.16rem;
+  cursor: pointer;
+}
+
+/* Course-Card */
+.courses-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+  gap: 1rem;
+  font-family: "Poppins", sans-serif;
+  padding: 3rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  width: calc(100% / 4 - 3rem);
+}
+
+.api-image-wrapper {
+  width: 100%;
+}
+
+.course-card .api-image-wrapper img {
+  width: 100%;
+}
+
+.course-card .title {
+  margin-bottom: -3px;
+}
+
+.course-card .author {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  opacity: 0.4;
+}
+
+.course-card .price {
+  margin-top: 4px;
+  font-size: 1.08rem;
+}
+
+/* INDIVUAL COURSE AFTER AFTER CLICKING ON HOME PAGE COURSE CARD */
+
+.individual-course-card-home-page {
+  display: flex;
+  align-items: center;
+  padding: 2rem 3rem;
+  justify-content: center;
+  gap: 4rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.individual-course-card-home-page .image-wrapper {
+  width: 40%;
+}
+
+.individual-course-card-home-page img {
   display: block;
   width: 100%;
 }
 
-.courses-container{
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(min(9rem,100%),1fr));
-  gap: 1rem;
+.individual-course-card-home-page .right-side {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  gap: 7rem;
 }
 
-.course-card{
+
+.buy-btn-row {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.right-side .buy-btn-row button {
+  background-color: #82cb14;
+  color: rgb(255, 255, 255);
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.71rem;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/*  Create Course Routes PAge CSS */
+
+.btn-row {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.btn-row button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: rgb(100, 198, 241);
+  cursor: pointer;
+}
+
+
+
+
+.image-wrapper-create {
+  width: 60%;
+  margin: 2rem auto;
+  display: grid;
+  place-items: center;
+}
+
+.image-wrapper-create img {
+  width: 100%;
+  display: block;
+}
+
+
+.edit-btn-row{
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.edit-btn-row button{
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: rgb(100, 198, 241);
+  cursor: pointer;
+}
+
+.start-creating-btn{
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #82cb14;
+  cursor: pointer;
+  color: white;
+  
+}
+
+
+/* UPDATE CONTAINER | Create-Container */
+.update-container{
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  outline: 4px solid hotpink;
-  width: calc(100%/3 - 3rem);
+  align-items: flex-start;
+  padding: 4rem;
+  gap: 2rem;
 }
 
-.course-card img{
-  width: 30%;
+.update-container input{
+  width: 80%;
+  padding: .7rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: transparent;
 }
 
-.home-page-course-card{
-
+.dropdown-row{
+  display: flex;
+  gap: 2rem;
 }
 
-.home-page-course-card img{
-  width: 30%;
+.dropdown-row label{
+  font-size: 1.1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dropdown-row select{
+  padding: .41rem;
+  font-size: 1.1rem;
+}
+
+
+.update-container textarea{
+  font-size: 1.2rem;
+  resize: none;
+  padding: .7rem;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.update-container button{
+  margin : 0 auto;
+  background-color: lightgreen;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 5px;
+  padding: .8rem;
+  font-size: 1.2rem;
+  cursor: pointer;
 }

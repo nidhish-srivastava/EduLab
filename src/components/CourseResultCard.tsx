@@ -1,22 +1,31 @@
-import { courseType } from "./CreatingCourses/MyCourses"
-import { Link } from "react-router-dom"
+import { courseType } from "./CreatingCourses/MyCourses";
+import { Link } from "react-router-dom";
 
 type CourseResultCardProp = {
-    course : courseType
-}
+  course: courseType;
+};
 
-function CourseResultCard({course} : CourseResultCardProp ) {
+function CourseResultCard({ course }: CourseResultCardProp) {
   return (
     <Link to={`${course._id}`}>
-    <div className="course-card">
-    <img src={`http://localhost:3000/${course.imageLink}`} alt="" className="course-img" />
-    <h2>Title:{course.title}</h2>
-    <h2>Desc:{course.description}</h2>
-    <h2>Price:{course.price}</h2>
-    <h2>Author : {course.author}</h2>
-    </div>
-  </Link>
-  )
+      <div className="course-card">
+        <div className="api-image-wrapper">
+          <img
+            src={`http://localhost:3000/${course.imageLink}`}
+            alt=""
+            className="course-img"
+          />
+        </div>
+        <div className="content-wrapper">
+        <h2 className="title" >{course.title}</h2>
+        <h4 className="author" > {course.author}</h4>
+        <h3 className="price">
+        &#8377;{course.price}
+          </h3>
+        </div>
+      </div>
+    </Link>
+  );
 }
 
-export default CourseResultCard
+export default CourseResultCard;

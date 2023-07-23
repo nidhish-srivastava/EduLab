@@ -24,7 +24,7 @@ function App() {
 
           <Route path="/edulab-business" element={<Business />} />
 
-          <Route path="/instructor" element={<Instructor />} />
+          <Route  path="/instructor" element={<Instructor />} />
           <Route path="/instructor/my-courses" element={<MyCourses />} />
           <Route path="/instructor/create-course" element={<CreateCourse />} />
           <Route path="/instructor/my-courses/:courseId" element={<Course />} />

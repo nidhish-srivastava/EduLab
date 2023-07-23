@@ -19,11 +19,15 @@ function SignIn() {
     }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="form">
         <input required autoFocus = {true} placeholder="username" type="username" onChange={e=>setUsername(e.target.value)} value={username} />
-        <span onClick={()=>setShow(e=>!e)} >Show</span>
+        <div className="password-input">
         <input required type={show ? "text" : "password"} placeholder="password" value={password} onChange={e=>setPassword(e.target.value)} />
-        <button>SignIn</button>
+        <span onClick={()=>setShow(e=>!e)} className="show-name">
+        <i className="fa-solid fa-virus"></i>
+        </span>
+        </div>
+        <button className="form-submit-btn" >SignIn</button>
     </form>
   )
 }
