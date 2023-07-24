@@ -10,6 +10,7 @@ import Home from "./components/HomePage";
 import Instructor from "./components/CreatingCourses/Instructor";
 import HomePageCourse from "./components/HomePageCourse";
 import Business from "./components/Business/Business";
+import Support from "./components/HelpDesk/Support";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
             path="/instructor/update-course/:courseId"
             element={<UpdateCourse />}
           />
+
+          <Route path="/support" element = {<Support/>} />
         </Routes>
       </BrowserRouter>
     </div>

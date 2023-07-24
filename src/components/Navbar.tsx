@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCourseContext } from "../context/context";
 
@@ -22,6 +22,15 @@ function Navbar() {
   }, []);
 
   return (
+    <Fragment>
+      <Link to={`/support`}>
+      <div className="support-btn-wrapper">
+        <span className="support-icon">
+        {/* <i className="fa-solid fa-circle-info"></i> */}
+        <i className="fa-solid fa-headset"></i>
+        </span>
+      </div>
+      </Link>
     <div className="nav-bar">
       <span className="logo">
       EduLab
@@ -54,6 +63,8 @@ function Navbar() {
         </div>
       )}
     </div>
+    </Fragment>
+
   );
 }
 
