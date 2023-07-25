@@ -14,9 +14,10 @@ function SignUp() {
                 username : username,
                 password : password
             })
-            console.log(response);
+            // console.log(response);
             localStorage.setItem("token",response.data.token)
             // window.location.href = "/signin"  // causing the window to relaod
+            alert("Account created,Now Sign In to continue!!!")
         }
         else alert("Password not matching")
     }

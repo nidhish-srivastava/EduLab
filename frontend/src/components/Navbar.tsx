@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCourseContext } from "../context/context";
+import a from '../blank.jpg'
 
 function Navbar() {
   const final = useCourseContext();
@@ -55,6 +56,11 @@ function Navbar() {
           >
             Logout
           </button>
+          <Link to={`/my-profile`}>
+            <div className="dp-small-wrapper">
+               <img src={a} alt="" />
+            </div>
+          </Link>
         </>
       ) : (
         <div className="sign-in-row">

@@ -11,6 +11,7 @@ import Instructor from "./components/CreatingCourses/Instructor";
 import HomePageCourse from "./components/HomePageCourse";
 import Business from "./components/Business/Business";
 import Support from "./components/HelpDesk/Support";
+import Profile from './components/Profile'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/my-profile" element = {<Profile/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />

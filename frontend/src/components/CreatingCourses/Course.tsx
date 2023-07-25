@@ -14,7 +14,7 @@ function Course() {
         "Authorization" : "Bearer " + localStorage.getItem("token")
       }
     })
-    console.log(response.data);
+    // console.log(response.data);
     final?.setCourse(response.data.course)
   }
 

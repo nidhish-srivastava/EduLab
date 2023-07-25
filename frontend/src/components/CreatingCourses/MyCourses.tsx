@@ -26,6 +26,8 @@ function MyCourses() {
         }
       );
       const data = await response.json();
+      // console.log(data);
+      
       setCoursesArray(data.courses);
     } catch (error) {}
   };

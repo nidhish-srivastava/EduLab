@@ -77,13 +77,8 @@ router.put('/course/:courseId',async (req, res) => {
 router.get('/courses/:username', authenticateJwt, async (req, res) => {
     try {
         const admin = await Auth.findOne({ username: req.user.username })
-        if(admin.username===req.params.username){
-            const courses = await Course.find();  //* since we are using ref(if we need to access author,then we need to use populate method)
+            const courses = await Course.find({author : admin.username});  //* since we are using ref(if we need to access author,then we need to use populate method)
             res.json({ courses });
-        }
-        else{
-            res.status(500).json("Server")
-        }  
     } catch (error) {
         res.status(500).json("Server")
     }
