@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { useCourseContext } from "../context/context";
 
@@ -30,10 +30,14 @@ function HomePageCourse() {
       </div>
       <div>
     <h2>&#8377;{courseObject?.price}</h2>
+    {
+      courseObject?.author !== final?.userEmail && (
     <div className="buy-btn-row">
     <button>Buy Now</button>
     <button>Add to Cart</button>
     </div>
+      )
+    }
       </div>
     </div>
   </div>;

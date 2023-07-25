@@ -413,3 +413,43 @@ a {
   background-color: lightgreen;
   cursor: pointer;
 }
+
+.business-page-container{
+  display: flex;
+  padding: 1rem;
+}
+
+.left-side-business-page{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  font-family: 'Poppins',sans-serif;
+  gap: 2.4rem;
+  padding: 1rem;
+}
+
+.form-container-business{
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  font-family: 'Poppins',sans-serif;
+  align-items: flex-start;
+  padding: 1.6rem;
+  font-size: 1.2rem;
+}
+
+.form-container-business input,.form-container-business select,.form-container-business button{
+  font-family: 'Poppins',sans-serif;
+  font-size: 1.1rem;}
+
+.form-container-business button{
+  margin-left: 14rem;
+  margin-top: 1rem;
+  width: 50%;
+  padding: .7rem;
+  background-color: #2e86f8;
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+}

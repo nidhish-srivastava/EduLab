@@ -39,34 +39,42 @@ function BusinessForm({ setShow }: BusinessFormProps) {
     setShow(true);
   };
   return (
-    <div>
-      <form onSubmit={submitHandler}>
+    <>
+      <form onSubmit={submitHandler} className="form-container-business" >
+        <label htmlFor="">FirstName
+        </label>
         <input
           type="text"
           placeholder="First Name*"
           autoFocus={true}
           ref={firstName}
-        />
+          />
+            <label htmlFor="">Last Name</label>
         <input type="text" placeholder="Last Name*" required ref={lastName} />
+            <label htmlFor="">Work Email</label>
         <input
           type="email"
           placeholder="Work Email*"
           required
           ref={workEmail}
         />
+         <label htmlFor="">Mobile Number</label>          
         <input
           type="tel"
           placeholder="Mobile Number"
           required
           ref={mobileNumber}
         />
+        <label htmlFor="">Company Name</label>
         <input
           type="text"
           placeholder="Company Name*"
           required
           ref={companyName}
         />
+        <label htmlFor="">Job Title</label>
         <input type="text" placeholder="Job Title*" required ref={jobTitle} />
+        <label htmlFor="">Job Level</label>
         <select value={jobLevel} onChange={(e) => setJobLevel(e.target.value)}>
           <option value="" disabled selected>
             Job Level*
@@ -77,6 +85,7 @@ function BusinessForm({ setShow }: BusinessFormProps) {
             </option>
           ))}
         </select>
+        <label htmlFor="">Country</label>
         <select value={country} onChange={(e) => setCountry(e.target.value)}>
           <option value="" disabled selected>
             Choose Country*
@@ -87,6 +96,7 @@ function BusinessForm({ setShow }: BusinessFormProps) {
             </option>
           ))}
         </select>
+        <label htmlFor="">CompanySize</label>
         <select
           value={companySize}
           onChange={(e) => setCompanySize(e.target.value)}
@@ -100,7 +110,7 @@ function BusinessForm({ setShow }: BusinessFormProps) {
         </select>
         <button>Get in Touch</button>
       </form>
-    </div>
+    </>
   );
 }
 
