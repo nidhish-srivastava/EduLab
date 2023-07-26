@@ -12,6 +12,7 @@ import HomePageCourse from "./components/HomePageCourse";
 import Business from "./components/Business/Business";
 import Support from "./components/HelpDesk/Support";
 import Profile from './components/Profile'
+import University from "./components/University/University";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/:courseId" element={<HomePageCourse />} />
 
           <Route path="/edulab-business" element={<Business />} />
+          <Route path="/edulab-university" element = {<University/>} />
 
           <Route  path="/instructor" element={<Instructor />} />
           <Route path="/instructor/my-courses" element={<MyCourses />} />

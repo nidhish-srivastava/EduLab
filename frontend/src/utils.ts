@@ -1,6 +1,31 @@
+export const JobTitleUniversity = [
+  "President",
+  "Chancellor",
+  "Vice-Chancellor",
+  "Vice President",
+  "Registrar",
+  "CEO",
+  "Dean",
+  "Department Head",
+  "Director",
+  "Professor",
+  "Student"
+]
+export const Department = [
+  "Academic Affairs",
+  "Career Services",
+  "Continuing Education",
+  "Enrollment Management",
+  "Executive Leadership",
+  "Internation",
+  "Strategic Planning",
+  "Student Affairs",
+  "Teaching/Faculty/Research",
+  "Other"
+]
 
 export const JobTitle = [
-    "C-Level",
+    "CEO",
     "VP",
     "Director",
     "Manager",

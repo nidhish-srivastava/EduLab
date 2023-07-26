@@ -22,7 +22,6 @@ const businessRegisterSchema = new mongoose.Schema({
   workEmail: String,
   mobileNumber: Number,
   companyName: String,
-  jobTitle: String,
   jobLevel: String,
   country: String,
   companySize: String
@@ -32,14 +31,27 @@ const supportSchema = new mongoose.Schema({
   problem : String
 })
 
+const universityRegisterSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  workEmail: String,
+  mobileNumber: Number,
+  institutionName: String,
+  jobLevel : String,
+  country : String,
+  department : String
+})
+
 const Auth = mongoose.model('Admin', AuthSchema);
 const Course = mongoose.model('Course', courseSchema);
 const Business = mongoose.model('Business', businessRegisterSchema)
 const Support = mongoose.model('Support',supportSchema)
+const University = mongoose.model('University',universityRegisterSchema)
 
 module.exports = {
   Auth,
   Course,
   Business,
-  Support
+  Support,
+  University
 }

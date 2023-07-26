@@ -495,3 +495,20 @@ a {
   object-fit: contain;
   object-position: center;
 }
+
+/* REgister business Response  */
+
+.business-register-container{
+  font-family: 'Montserrat',sans-serif;
+  font-size: 2rem;
+  padding: 4rem;
+  display: grid;
+}
+
+.business-register-container .modal{
+width: 600px;
+min-height: 300px;
+padding: 3rem;
+border-radius: 3rem;
+background-color: rgb(17, 233, 100);
+}

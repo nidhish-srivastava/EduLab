@@ -1,21 +1,21 @@
-import axios from "axios";
 import { useRef, useState } from "react";
-import { JobTitle, CompanySize, countriesList } from "../../utils";
+import axios from "axios";
+import { countriesList,JobTitleUniversity,Department } from "../../utils";
 
-type BusinessFormProps = {
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
-};
+type UniversityFormProps = {
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  };
 
-function BusinessForm({ setShow }: BusinessFormProps) {
-  const firstName = useRef<HTMLInputElement>(null);
+function UniversityForm({setShow} : UniversityFormProps ) {
+    const firstName = useRef<HTMLInputElement>(null);
   const lastName = useRef<HTMLInputElement>(null);
   const workEmail = useRef<HTMLInputElement>(null);
   const mobileNumber = useRef<HTMLInputElement>(null);
-  const companyName = useRef<HTMLInputElement>(null);
-  const jobTitle = useRef<HTMLInputElement>(null);
+  const institutionName = useRef<HTMLInputElement>(null);
   const [jobLevel, setJobLevel] = useState("");
   const [country, setCountry] = useState("");
-  const [companySize, setCompanySize] = useState("");
+  const [department, setDepartment] = useState("");
+
   const submitHandler = async (e: any) => {
     e.preventDefault();
     // Collect form data from the ref elements
@@ -24,22 +24,22 @@ function BusinessForm({ setShow }: BusinessFormProps) {
       lastName: lastName.current?.value,
       workEmail: workEmail.current?.value,
       mobileNumber: mobileNumber.current?.value,
-      companyName: companyName.current?.value,
+      institutionName: institutionName.current?.value,
       jobLevel,
       country,
-      companySize,
+      department
     };
     const response = await axios.post(
-      `http://localhost:3000/business`,
+      `http://localhost:3000/university`,
       formData
     );
     console.log(response.data);
     alert("Form submitted");
-    setShow(true);
+    setShow(true)
   };
   return (
-    <>
-      <form onSubmit={submitHandler} className="form-container-business" >
+    <div>
+        <form onSubmit={submitHandler} className="form-container-business" >
         <label htmlFor="">FirstName
         </label>
         <input
@@ -64,21 +64,19 @@ function BusinessForm({ setShow }: BusinessFormProps) {
           required
           ref={mobileNumber}
         />
-        <label htmlFor="">Company Name</label>
+        <label htmlFor="">Institution Name</label>
         <input
           type="text"
-          placeholder="Company Name*"
+          placeholder="Institution Name*"
           required
-          ref={companyName}
+          ref={institutionName}
         />
         <label htmlFor="">Job Title</label>
-        <input type="text" placeholder="Job Title*" required ref={jobTitle} />
-        <label htmlFor="">Job Level</label>
         <select value={jobLevel} onChange={(e) => setJobLevel(e.target.value)}>
           <option value="" disabled selected>
             Job Level*
           </option>
-          {JobTitle?.map((e: string, i) => (
+          {JobTitleUniversity?.map((e: string, i) => (
             <option key={i} value={e}>
               {e}
             </option>
@@ -95,22 +93,22 @@ function BusinessForm({ setShow }: BusinessFormProps) {
             </option>
           ))}
         </select>
-        <label htmlFor="">CompanySize</label>
+        <label htmlFor="">Department</label>
         <select
-          value={companySize}
-          onChange={(e) => setCompanySize(e.target.value)}
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
         >
           <option value="" disabled selected>
-            Company Size*
+            Select*
           </option>
-          {CompanySize.map((e: string, i) => (
-            <option value={e} key={i} >{e}</option>
+          {Department.map((e: string) => (
+            <option value={e}>{e}</option>
           ))}
         </select>
         <button>Get in Touch</button>
       </form>
-    </>
-  );
+    </div>
+  )
 }
 
-export default BusinessForm;
+export default UniversityForm

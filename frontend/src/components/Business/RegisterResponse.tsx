@@ -1,8 +1,10 @@
 
 function RegisterResponse() {
   return (
-    <div>
-        Thank You for Registering,we will contact you in short time
+    <div className="business-register-container">
+      <div className="modal">
+        Thank You for Registering,We will contact you in short time
+      </div>
     </div>
   )
 }

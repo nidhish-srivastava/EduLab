@@ -5,6 +5,7 @@ const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
 const businessRouter = require("./routes/business")
 const supportRouter = require("./routes/support")
+const universityRouter = require("./routes/university")
 const dotenv = require('dotenv')
 dotenv.config()
 const cookieParser = require('cookie-parser')
@@ -26,3 +27,4 @@ app.use("/admin", adminRouter)
 app.use("/user", userRouter)
 app.use("/business",businessRouter)
 app.use('/support',supportRouter)
+app.use('/university',universityRouter)

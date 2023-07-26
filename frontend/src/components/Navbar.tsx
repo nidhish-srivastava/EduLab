@@ -45,6 +45,11 @@ function Navbar() {
           Edulab Business
           </Link>
       </span>
+      <span className="business-logo" >
+        <Link to={`/edulab-university`} style={{padding : ".6rem",borderRadius : "10px" }} >
+          Edulab University
+          </Link>
+      </span>
           <input type="search" placeholder="Tap Here to Search" className="search-bar" />
        
           {/* <button>Cart{" (0) "}</button> */}
