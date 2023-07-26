@@ -48,7 +48,7 @@ function MyCourses() {
             </button>
           </div>
         </Link>
-      <div className="courses-container">
+      <div className="my-courses-container">
         {coursesArray?.map((course: courseType) => {
           return <CourseResultCard course={course} />;
         })}
