@@ -7,7 +7,7 @@ type CourseResultCardProp = {
 
 function CourseResultCard({ course }: CourseResultCardProp) {
   return (
-    <div style={{padding : "2rem"}}>
+    <div>
     <Link to={`${course._id}`}>
       <div className="course-card">
         <div className="api-image-wrapper">
@@ -18,7 +18,7 @@ function CourseResultCard({ course }: CourseResultCardProp) {
             />
         </div>
         <div className="content-wrapper">
-        <h2 className="title" >{course.title}</h2>
+        <h3 className="title" >{course.title}</h3>
         <h4 className="author" > {course.author}</h4>
         <h3 className="price">
         &#8377;{course.price}

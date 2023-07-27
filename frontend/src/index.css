@@ -172,16 +172,14 @@ a {
 /* Course-Card */
 .courses-container,.my-courses-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(1rem, 100%), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, 35%); /* Adjust as needed */
+  gap: 10px; /* Adjust the gap between grid items */
   font-family: "Poppins", sans-serif;
   padding: 3rem;
+  overflow: hidden;
+  margin-left: 6rem;
 }
 
-.my-courses-container{
-  width: 80%;
-  /* margin: 0 auto; */
-}
 
 .course-card {
   display: flex;

@@ -8,14 +8,18 @@ function SignIn() {
 
     const submitHandler = async(e : any) =>{
         e.preventDefault()
-            const response = await axios.post(`http://localhost:3000/admin/login`,{
-                username : username,
-                password : password
-            })
-            console.log(response);
-            localStorage.setItem("token",response.data.token)
-            alert("Logged In Successfully")
-            window.location.href = "/"  // causing the window to relaod
+        try {
+          const response = await axios.post(`http://localhost:3000/admin/login`,{
+              username : username,
+              password : password
+          })
+          console.log(response);
+          localStorage.setItem("token",response.data.token)
+          alert("Logged In Successfully")
+          window.location.href = "/"  // causing the window to relaod
+        } catch (error : any) {
+          alert(error.response.data.message)
+        }
     }
 
   return (
