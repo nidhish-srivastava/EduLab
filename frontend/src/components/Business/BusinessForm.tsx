@@ -71,7 +71,7 @@ function BusinessForm({ setShow }: BusinessFormProps) {
           required
           ref={companyName}
         />
-        <label htmlFor="">Job Title</label>
+        <label>Job Title</label>
         <input type="text" placeholder="Job Title*" required ref={jobTitle} />
         <label htmlFor="">Job Level</label>
         <select value={jobLevel} onChange={(e) => setJobLevel(e.target.value)}>

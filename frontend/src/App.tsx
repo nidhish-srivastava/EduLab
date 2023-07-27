@@ -13,8 +13,10 @@ import Business from "./components/Business/Business";
 import Support from "./components/HelpDesk/Support";
 import Profile from './components/Profile'
 import University from "./components/University/University";
+import { useCourseContext } from "./context/context";
 
 function App() {
+  const final = useCourseContext()
   return (
     <div className="main-app-container">
       <BrowserRouter>
@@ -37,7 +39,6 @@ function App() {
             path="/instructor/update-course/:courseId"
             element={<UpdateCourse />}
           />
-
           <Route path="/support" element = {<Support/>} />
         </Routes>
       </BrowserRouter>
