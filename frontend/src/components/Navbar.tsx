@@ -14,7 +14,6 @@ function Navbar() {
     });
     const data = await response.json();
     console.log(data);
-    
     final?.setUserEmail(data.username);
   };
 
@@ -72,6 +71,11 @@ function Navbar() {
       <span className="business-logo">
         <Link to={`/edulab-business`}>
           Edulab Business
+          </Link>
+      </span>
+      <span className="business-logo" >
+        <Link to={`/edulab-university`} style={{padding : ".6rem",borderRadius : "10px" }} >
+          Edulab University
           </Link>
       </span>
           <input type="search" placeholder="Tap Here to Search" className="search-bar" />

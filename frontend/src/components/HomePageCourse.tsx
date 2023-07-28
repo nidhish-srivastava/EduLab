@@ -16,17 +16,20 @@ function HomePageCourse() {
     setCourseObject(response.data);
   };
 
+  const bodyForm = {
+    userId : final?.userId
+  }
+
   const addToCart = async() =>{
     const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
-      headers : {
-        "Authorization" : "Bearer " + localStorage.getItem("token")
-      }
+    bodyForm  
     })
     console.log(response.data);
   }
 
   useEffect(() => {
     fetchCourse();
+    console.log(final?.userId);
   }, []);
 
   return (

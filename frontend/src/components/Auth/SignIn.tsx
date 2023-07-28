@@ -1,9 +1,12 @@
 import {useState} from "react";
 import axios from "axios";
+import { useCourseContext } from "../../context/context";
+
 
 function SignIn() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const final = useCourseContext()
     const [show,setShow] = useState(false)
 
     const submitHandler = async(e : any) =>{
@@ -16,7 +19,8 @@ function SignIn() {
           console.log(response);
           localStorage.setItem("token",response.data.token)
           alert("Logged In Successfully")
-          window.location.href = "/"  // causing the window to relaod
+          window.location.href = "/"            // causing the window to relaod
+          final?.setUserId(response.data.admin._id)
         } catch (error : any) {
           alert(error.response.data.message)
         }
