@@ -1,11 +1,15 @@
 import {useState} from 'react'
 import a from './2.jpg'
 import axios from 'axios'
+import { useCourseContext } from '../../context/context'
 function Support() {
     const [problem,setProblem] = useState("")
+    const final = useCourseContext()
     const sendProblemHandler = async() =>{
-       await axios.post(`http://localhost:3000/support`,{
-        problem
+     const username =  final?.userEmail
+      await axios.post(`http://localhost:3000/support`,{
+        problem,
+        username
       })
       alert("Our team will look into your Problem")
     }

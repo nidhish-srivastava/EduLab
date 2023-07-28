@@ -15,6 +15,16 @@ function HomePageCourse() {
     console.log(response.data);
     setCourseObject(response.data);
   };
+
+  const addToCart = async() =>{
+    const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
+      headers : {
+        "Authorization" : "Bearer " + localStorage.getItem("token")
+      }
+    })
+    console.log(response.data);
+  }
+
   useEffect(() => {
     fetchCourse();
   }, []);
@@ -38,7 +48,7 @@ function HomePageCourse() {
             {courseObject?.author !== final?.userEmail && (
               <div className="buy-btn-row">
                 <button>Buy Now</button>
-                <button>Add to Cart</button>
+                <button onClick={addToCart}>Add to Cart</button>
               </div>
             )}
           </div>

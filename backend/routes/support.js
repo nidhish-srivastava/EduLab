@@ -4,8 +4,8 @@ const router = express.Router()
 
 
 router.post('/',async(req,res)=>{
-    const {problem} = req.body
-    await Support.create({problem})
+    const {problem,username} = req.body
+    await Support.create({problem,username})
     res.json("Problem sent successfully")
 })
 

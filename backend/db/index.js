@@ -28,7 +28,8 @@ const businessRegisterSchema = new mongoose.Schema({
 })
 
 const supportSchema = new mongoose.Schema({
-  problem : String
+  problem : String,
+  username : String 
 })
 
 const universityRegisterSchema = new mongoose.Schema({
@@ -42,16 +43,40 @@ const universityRegisterSchema = new mongoose.Schema({
   department : String
 })
 
+const cartSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Assuming you have a User schema defined as well
+    required: true,
+  },
+  items: [
+    {
+      course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course',
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+      },
+    },
+  ],
+});
+
+
 const Auth = mongoose.model('Admin', AuthSchema);
 const Course = mongoose.model('Course', courseSchema);
 const Business = mongoose.model('Business', businessRegisterSchema)
 const Support = mongoose.model('Support',supportSchema)
 const University = mongoose.model('University',universityRegisterSchema)
+// const Cart = mongoose.model('Cart',cartSchema)
 
 module.exports = {
   Auth,
   Course,
   Business,
   Support,
-  University
+  University,
+  // Cart
 }

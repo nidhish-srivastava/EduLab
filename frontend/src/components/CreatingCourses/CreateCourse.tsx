@@ -51,7 +51,7 @@ function CreateCourse() {
       body: formData,
       credentials: 'include'
     })
-    alert("Added course!")
+    alert("Course Created!")
     navigate('/')
   }
 
@@ -65,7 +65,7 @@ function CreateCourse() {
         type="file"
         onChange={handleFileChange}
       />
-      <div className="dropdown-row">
+      {/* <div className="dropdown-row">
         <label htmlFor="">Choose Category : </label>
       <select value={category} onChange={e=>setCategory(+e.target.value)} >
         {categories.map((e,i)=>(
@@ -81,7 +81,7 @@ function CreateCourse() {
             })
           }
       </select>
-          </div>
+          </div> */}
       <button>Submit</button>
     </form>
   )
