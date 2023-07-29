@@ -45,8 +45,7 @@ const universityRegisterSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Assuming you have a User schema defined as well
+    type: String,
     required: true,
   },
   items: [
@@ -70,7 +69,7 @@ const Course = mongoose.model('Course', courseSchema);
 const Business = mongoose.model('Business', businessRegisterSchema)
 const Support = mongoose.model('Support',supportSchema)
 const University = mongoose.model('University',universityRegisterSchema)
-// const Cart = mongoose.model('Cart',cartSchema)
+const Cart = mongoose.model('Cart',cartSchema)
 
 module.exports = {
   Auth,
@@ -78,5 +77,5 @@ module.exports = {
   Business,
   Support,
   University,
-  // Cart
+  Cart
 }

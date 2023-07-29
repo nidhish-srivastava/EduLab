@@ -12,24 +12,20 @@ function HomePageCourse() {
     const response = await axios.get(
       `http://localhost:3000/user/course/${courseId}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     setCourseObject(response.data);
   };
 
-  const bodyForm = {
-    userId : final?.userId
-  }
 
   const addToCart = async() =>{
     const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
-    bodyForm  
+    username : final?.userEmail
     })
     console.log(response.data);
   }
 
   useEffect(() => {
     fetchCourse();
-    console.log(final?.userId);
   }, []);
 
   return (

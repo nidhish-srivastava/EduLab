@@ -6,8 +6,8 @@ type CourseContextType = {
   setUserEmail: React.Dispatch<React.SetStateAction<string>>;
   course: courseType | null;
   setCourse: React.Dispatch<React.SetStateAction<courseType | null>>;
-  userId : number
-  setUserId : React.Dispatch<React.SetStateAction<number>>
+  cartQuantity : number
+  setCartQuantity : React.Dispatch<React.SetStateAction<number>>
 };
 
 const CourseContext = createContext<CourseContextType | null>(null);
@@ -26,14 +26,13 @@ type CourseContextProvider = {
 export const CourseContextProvider = ({ children }: CourseContextProvider) => {
   const [userEmail, setUserEmail] = useState("");
   const [course, setCourse] = useState<courseType | null>(null);
-  const [userId, setUserId] = useState<number>(0);
+  const [cartQuantity,setCartQuantity] = useState(0)
   const final = {
     userEmail,
     setUserEmail,
     course,
     setCourse,
-    userId,
-    setUserId,
+    cartQuantity,setCartQuantity
   };
   return (
     <CourseContext.Provider value={final}>{children}</CourseContext.Provider>

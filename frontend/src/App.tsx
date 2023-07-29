@@ -13,10 +13,9 @@ import Business from "./components/Business/Business";
 import Support from "./components/HelpDesk/Support";
 import Profile from './components/Profile'
 import University from "./components/University/University";
-import { useCourseContext } from "./context/context";
+import Cart from "./components/Auth/Cart/Cart";
 
 function App() {
-  const final = useCourseContext()
   return (
     <div className="main-app-container">
       <BrowserRouter>
@@ -27,7 +26,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />
           <Route path="/:courseId" element={<HomePageCourse />} />
-
+          <Route path="/cart" element = {<Cart/>} />
           <Route path="/edulab-business" element={<Business />} />
           <Route path="/edulab-university" element = {<University/>} />
 
