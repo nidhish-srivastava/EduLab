@@ -16,6 +16,7 @@ function HomePageCourse() {
     setCourseObject(response.data);
   };
 
+  //* We will fetch the cartItems array,then use the find method to find courseId which matches any courseId inside the array,If matches this means we have added the item to the array,so disable the buy button
 
   const addToCart = async() =>{
     const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
