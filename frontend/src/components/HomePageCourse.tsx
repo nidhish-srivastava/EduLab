@@ -21,7 +21,7 @@ function HomePageCourse() {
     const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
     username : final?.userEmail
     })
-    console.log(response.data);
+    console.log(response.data.items);
   }
 
   useEffect(() => {
