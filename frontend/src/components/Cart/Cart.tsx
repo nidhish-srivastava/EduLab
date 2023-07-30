@@ -7,6 +7,7 @@ import { courseType } from "../CreatingCourses/MyCourses"
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
     const final = useCourseContext()
+
     const fetchCartItems = async() =>{
         const response = await axios.get(`http://localhost:3000/cart/${final?.userEmail}`)
         console.log(response.data);
@@ -16,6 +17,13 @@ function Cart() {
     const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
       return acc + iti.price
     },0)
+
+    const removeCartItem = async(courseId : number | undefined) =>{
+      const response = await axios.post(`http://localhost:3000/cart/purchase/delete/${courseId}`,{
+        username : final?.userEmail
+      })
+      console.log(response.data);
+    }
 
     useEffect(()=>{
       fetchCartItems()
@@ -36,6 +44,9 @@ function Cart() {
               </div>
               <h3>&#8377;{e.price}</h3>
             </div>
+            <span className="remove-course" onClick={()=>removeCartItem(e?._id)}>
+              <i className="fa fa-trash" ></i>
+            </span>
           </div>
         ))}
     </main>

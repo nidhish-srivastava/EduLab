@@ -19,10 +19,21 @@ function HomePageCourse() {
   //* We will fetch the cartItems array,then use the find method to find courseId which matches any courseId inside the array,If matches this means we have added the item to the array,so disable the buy button
 
   const addToCart = async() =>{
-    const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
-    username : final?.userEmail
-    })
-    console.log(response.data.items);
+    try {
+      const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
+      username : final?.userEmail
+      },{
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      if(response.status===403) alert("Unauthorized to Buy,Login or SignUp to buy")
+      console.log(response.data);
+      response.data.msg && alert(response.data.msg)
+    } 
+    catch (error) {
+          alert("Login/SignUp to buy a course")      
+    }
   }
 
   useEffect(() => {
