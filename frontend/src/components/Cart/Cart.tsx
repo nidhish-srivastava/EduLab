@@ -1,9 +1,8 @@
 import axios from "axios"
 import {useState} from 'react'
 import {useEffect} from 'react'
-import { useCourseContext } from "../../../context/context"
-import { courseType } from "../../CreatingCourses/MyCourses"
-
+import { useCourseContext } from "../../context/context"
+import { courseType } from "../CreatingCourses/MyCourses"
 
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])

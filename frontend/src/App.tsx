@@ -13,7 +13,7 @@ import Business from "./components/Business/Business";
 import Support from "./components/HelpDesk/Support";
 import Profile from './components/Profile'
 import University from "./components/University/University";
-import Cart from "./components/Auth/Cart/Cart";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   return (

@@ -4,9 +4,7 @@ const router = express.Router()
 
 
 router.post('/purchase/add/:courseId', async (req, res) => {
-  //* Problem i am facing is in front end for sending userId 
 
-  //* I guess the express controller logic will work pretty good
   const { courseId } = req.params
   const { username } = req.body
   const course = await Course.findById(courseId)

@@ -63,7 +63,6 @@ function Navbar() {
             <Link to={`/cart`}>
               <span className="cart-icon">
               <i className="fa-solid fa-cart-shopping"></i>
-              {final.cartQuantity}
               </span>
             </Link>
 
