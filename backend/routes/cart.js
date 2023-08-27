@@ -41,12 +41,16 @@ router.post('/purchase/add/:courseId', authenticateJwt,async (req, res) => {
 
 router.post('/purchase/delete/:courseId',async(req,res)=>{
   const { courseId } = req.params
-  const { username } = req.body
+  const { username,cartDocumentId } = req.body
   try {
-    let cart = await Cart.findOne({ user: username });
+    //* ISince there are many documents inside our cart collection,first it will find the user
+    //* No need to first fint the user inside the cartCollection,if this happens then we wont be able to access the whole document
+    // let cart = await Cart.findOne({ user: username }); 
     // I am getting the filtered array but i am not able to mutate the original cart
-    const filtered = cart.items.filter((e)=>e.course!=courseId)
-    res.json(filtered)
+    // const filtered = cart.items.filter((e)=>e.course!=courseId)
+    // const updateCart = new Cart(filtered)
+    // await updateCart.save()
+    const updateCourseArray = await Cart.updateOne({_id : cartDocumentId},{$pull : {items : {course : courseId}}})
   } catch (error) {
          
   }
@@ -59,7 +63,7 @@ router.get('/:username',  async (req, res) => {
   // Extract cartItems from the cart and send the response
   const cartItems = cart?.items.map((item) => item.course);
   const quantity = cart?.items.quantity
-  res.json({cartItems,quantity})
+  res.json({cartItems,quantity,cart})
 })
 
 

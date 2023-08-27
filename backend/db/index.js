@@ -44,7 +44,7 @@ const universityRegisterSchema = new mongoose.Schema({
 })
 
 const cartSchema = new mongoose.Schema({
-  user: {
+  user: {   // i could have used ref but there are problems in that as well
     type: String,
     required: true,
   },

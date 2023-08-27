@@ -6,12 +6,15 @@ import { courseType } from "../CreatingCourses/MyCourses"
 
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
+    const [cartDocument,setCartDocument] = useState("")
     const final = useCourseContext()
+    const [render,setRender] = useState(false)
 
     const fetchCartItems = async() =>{
         const response = await axios.get(`http://localhost:3000/cart/${final?.userEmail}`)
         console.log(response.data);
         setCartItemsArray(response.data.cartItems)
+        setCartDocument(response.data.cart._id)
         final?.setCartQuantity(response.data.cartItems.length)
     }
     const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
@@ -19,15 +22,16 @@ function Cart() {
     },0)
 
     const removeCartItem = async(courseId : number | undefined) =>{
-      const response = await axios.post(`http://localhost:3000/cart/purchase/delete/${courseId}`,{
-        username : final?.userEmail
+      await axios.post(`http://localhost:3000/cart/purchase/delete/${courseId}`,{
+        username : final?.userEmail,
+        cartDocumentId : cartDocument
       })
-      console.log(response.data);
+      setRender(e=>!e)
     }
 
     useEffect(()=>{
       fetchCartItems()
-    },[])
+    },[render])
   return (
     <main className="cart-items-container">
       <h2 style={{fontFamily : "Montserrat,sans-serif"}}>Total Bill : &#8377;{sum} </h2>
