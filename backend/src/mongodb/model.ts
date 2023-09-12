@@ -1,97 +1,90 @@
-import {Schema,model,Types} from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
-interface iAuth{
-  username : string
-  password : string
+interface iAuth {
+  username: string;
+  password: string;
 }
 
-interface iCourse{
-  title : string
-  description : string
-  price : number
-  imageLink : string
-//   published : boolean
-  category : string,
-  author : string
-//   authId : Types.ObjectId
+interface iCourse {
+  title: string;
+  description: string;
+  price: number;
+  imageLink: string;
+  //   published : boolean
+  category: string;
+  author: string;
+  //   authId : Types.ObjectId
 }
 
-interface iBusinessRegister{
-    firstName: string,
-  lastName: string,
-  workEmail: string,
-  mobileNumber: number,
-  companyName: string,
-  jobLevel: string,
-  country: string,
-  companySize: string
+interface iBusinessRegister {
+  firstName: string;
+  lastName: string;
+  workEmail: string;
+  mobileNumber: number;
+  companyName: string;
+  jobLevel: string;
+  country: string;
+  companySize: string;
 }
 
-interface iUniversityRegister{
-    firstName: string,
-    lastName: string,
-    workEmail: string,
-    mobileNumber: number,
-    institutionName: string,
-    jobLevel : string,
-    country : string,
-    department : string
+interface iUniversityRegister {
+  firstName: string;
+  lastName: string;
+  workEmail: string;
+  mobileNumber: number;
+  institutionName: string;
+  jobLevel: string;
+  country: string;
+  department: string;
 }
 
-interface iCart{
-    username : string
-    courses : {
-        quantity ?: number
-        course  : string
-    }[]
+interface iCart {
+  username: string;
+  courses: {
+    quantity?: number;
+    course: string;
+  }[];
 }
 
-interface iSupport{
-    problem : string,
-    username : string 
+interface iSupport {
+  problem: string;
+  username: string;
 }
 
 const authSchema = new Schema<iAuth>({
-   username : {type : String,required : true,unique : true},
-   password : {type : String,required : true}
-})
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
 
 const courseSchema = new Schema<iCourse>({
-    // authId : {type : Schema.Types.ObjectId,ref : "Auth",required : true},
-    author : {type : String,required : true},
-    title : {type : String,required : true},
-    description : {type : String,required : true},
-    price : {type : Number,required : true},
-    imageLink : {type : String,required : true},
-    // published : {type : Boolean},
-    category : {type : String,required : true},
-})
+  // authId : {type : Schema.Types.ObjectId,ref : "Auth",required : true},
+  author: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true },
+  imageLink: { type: String, required: true },
+  // published : {type : Boolean},
+  category: { type: String, required: true },
+});
 
 const cartSchema = new Schema<iCart>({
-  username : {type : String,required : true},
-  courses : [
+  username: { type: String, required: true },
+  courses: [
     {
-      course : {type : Schema.Types.ObjectId,ref : 'Course',required : true},
-      quantity : {type : Number,default : 0}
-    }
-  ]
-})
+      course: { type: Schema.Types.ObjectId, ref: "Course", required: true },
+      quantity: { type: Number, default: 0 },
+    },
+  ],
+});
 
-const businessRegisterSchema = new Schema<iBusinessRegister>({
-})
+const businessRegisterSchema = new Schema<iBusinessRegister>({});
 
-const supportSchema = new Schema<iSupport>({
-})
+const supportSchema = new Schema<iSupport>({});
 
-const universityRegisterSchema = new Schema<iUniversityRegister>({
-})
+const universityRegisterSchema = new Schema<iUniversityRegister>({});
 
-const Auth = model<iAuth>('Auth',authSchema)
-const Course = model<iCourse>('Course',courseSchema)
-const Cart = model<iCart>('Cart',cartSchema)
+const Auth = model<iAuth>("Auth", authSchema);
+const Course = model<iCourse>("Course", courseSchema);
+const Cart = model<iCart>("Cart", cartSchema);
 
-export {
-    Auth,
-    Course,
-    Cart
-}
+export { Auth, Course, Cart};

@@ -1,4 +1,4 @@
-import express from "express";
+import express,{Request,Response} from "express";
 import cors from "cors";
 import adminRouter from "./routes/admin.route";
 import authRouter from "./routes/auth.route";
@@ -13,7 +13,6 @@ const corsOptions = {
   //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -23,7 +22,9 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-app.get("/", (req, res) => {
+
+
+app.get("/", (req:Request, res:Response) => {
   res.send(`Welcome to Edulab`);
 });
 app.use("/admin", adminRouter);
