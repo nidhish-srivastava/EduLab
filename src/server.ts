@@ -1,6 +1,6 @@
 import app from "./index";
 import { connectmongodb } from "./mongodb/connect";
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 const start = async() =>{
     connectmongodb()
