@@ -14,7 +14,6 @@ function SignUp() {
         username: username,
         password: password,
       });
-      // console.log(response);
       localStorage.setItem("token", response.data.token);
       // window.location.href = "/signin"  // causing the window to relaod
       window.location.href = "/"; // causing the window to relaod

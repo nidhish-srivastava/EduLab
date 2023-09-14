@@ -3,7 +3,6 @@ import { useCourseContext } from "../../context/context";
 import { useNavigate } from "react-router-dom";
 // import { categoryArray } from "../../utils";
 import { courseType } from "./MyCourses";
-import axios from "axios";
 import Compress from "react-image-file-resizer";
 import { base64 } from "../../base64";
 
@@ -19,7 +18,7 @@ function CreateCourse() {
   const [formData, setFormData] = useState<courseType>({
     title: "",
     description: "",
-    price: 0,
+    price: "",
     author: final?.userEmail,
     imageLink: image,
   });
@@ -33,7 +32,7 @@ function CreateCourse() {
   };
 
   //* !!!  Logic for base64 image conversion so that we can preview it as well
-  const handleImage = (e: any) => {
+  const handleImage = () => {
     // create a file input dynamically
     const fileInput = document.createElement("input");
     fileInput.type = "file";
@@ -73,11 +72,15 @@ function CreateCourse() {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post(`http://localhost:3000/admin`, {
-      formData,
+    const res = await fetch(`http://localhost:3000/admin`, {
+      body : JSON.stringify(formData),
+      method : "POST",
+      credentials : "include",
+      headers : {
+        "Content-Type" : "application/json"
+      }
     });
-    alert("Course Created!");
-    navigate("/");
+    console.log(res);
   };
 
   return (
@@ -94,15 +97,16 @@ function CreateCourse() {
       <textarea
         rows={3}
         cols={50}
+        name="describe"
         placeholder="Describe your Course"
         required
         onChange={handleChange}
-        value={formData.description}
       />
       <input
         type="text"
         placeholder="Set price"
         required
+        name="price"
         onChange={handleChange}
         value={formData.price}
       />

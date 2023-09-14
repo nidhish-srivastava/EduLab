@@ -20,6 +20,7 @@ export const getProfile =  async (req : Request, res : Response) => {
 
 export const signup =async(req:Request,res : Response)=>{
     const {username,password} = req.body
+    console.log("Asdasd");
     const check = await Auth.findOne({username})
     if(check){
         res.status(403).json({ message: "User already exists" })

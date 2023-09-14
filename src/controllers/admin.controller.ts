@@ -18,34 +18,43 @@ import("nanoid")
   });
 
 const uploadImagePromise = async (
-  dp: string,
+  imageLink: string,
   imageId: string
 ): Promise<any> => {
-  // console.log("uplpoad image");
   try {
-    const imageUrl = await uploadImage(dp, imageId);
+    const imageUrl = await uploadImage(imageLink, imageId);
     return imageUrl;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const createCourse = async (req: Request, res: Response) => {
-  const { title, description, price, author, category, image } = req.body;
-  // const imageId = nanoid().split('-')[0]
+const createCoursePromise = async(title:string,description:string,price:number,author:string,imageUrl:string) : Promise<any>=>{
   try {
-    const imageUrl = await uploadImagePromise(image, imageId);
-    const create = await Course.create({
-      title,
-      description,
-      price,
-      imageLink: imageUrl,
-      author,
-      category: category,
-    });
-    await Promise.all([imageUrl, create]);
-    res.send(`Course created successfully`);
-  } catch (error) {}
+    const create = new Course({
+       title : title,
+       description : description,
+       price : price,
+       author : author,
+       imageLink : imageUrl
+    })
+    return await create.save()
+  } catch (error) {
+    
+  }
+  
+}
+
+export const createCourse = async (req: Request, res: Response) => {
+  const {title,description,price,author,imageLink} = req.body
+  try {
+    const imageUrl = await uploadImagePromise(imageLink, imageId);
+    const create  = await createCoursePromise(title,description,price,author,imageUrl)
+    await Promise.all([imageUrl,create])
+    res.send(`Course created successfully`)
+  } catch (error) {
+    
+  }
 };
 
 export const updateCourse = async (req: Request, res: Response) => {

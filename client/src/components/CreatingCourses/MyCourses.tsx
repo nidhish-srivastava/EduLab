@@ -6,8 +6,8 @@ export type courseType = {
   title: string;
   imageLink : string;
   description: string;
-  price: number;
-  _id?: number;
+  price : number | string
+  // _id?: number;
   author?: string;
 };
 

@@ -20,7 +20,7 @@ function HomePageCourse() {
 
   const addToCart = async() =>{
     try {
-      const response = await axios.post(`http://localhost:3000/cart/purchase/add/${courseId}`,{
+      const response = await axios.post(`http://localhost:3000/cart/${courseId}`,{
       username : final?.userEmail
       },{
         headers: {
