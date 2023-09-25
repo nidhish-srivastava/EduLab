@@ -10,6 +10,6 @@ This platform is like marketplace.You can create courses as well as sell courses
     <!--  - [react-hook-form](https://www.react-hook-form.com/) -->
   - [MongoDB](https://www.mongodb.com/) - Database
   - [Cloudinary](https://cloudinary.com/) - ImageStorage
-  - [Vercel](https://vercel.com/) - Deployment
+  <!--- [Vercel](https://vercel.com/) - Deployment-->
 
 #### !! Stripe Payments is to be added,then i will deploy the frontend to vercel as well
