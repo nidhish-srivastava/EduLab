@@ -1,36 +1,30 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { useCourseContext } from "../../context/context";
+import { courseType } from "./MyCourses";
 
 function Course() {
   const { courseId } = useParams();
-  const final = useCourseContext();
+  const [course,setCourse] = useState<courseType>()
   const navigate = useNavigate();
 
   const fetchCourse = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/admin/${courseId}`,
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    // console.log(response.data);
-    final?.setCourse(response.data.course);
+    const response = await fetch(`http://localhost:3000/admin/course/${courseId}`)
+    const data = await response.json()
+    // console.log(data);
+    setCourse(data)
   };
 
   const deleteHandler = async () => {
-    const response = await axios.delete(
+    await fetch(
       `http://localhost:3000/admin/${courseId}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
+        method : "DELETE"
       }
     );
-    alert(response.data);
+    alert("Deleted successfully");
     navigate("/instructor");
   };
 
@@ -41,19 +35,19 @@ function Course() {
   return (
     <div className="individual-course-card-home-page">
       <div className="image-wrapper">
-        <img src={`http://localhost:3000/${final?.course?.imageLink}`} alt="" />
+        <img src={course?.imageLink} alt="" />
       </div>
       <div className="right-side">
         <div>
-          <h1>{final?.course?.title}</h1>
-          <p>{final?.course?.description}</p>
+          <h1>{course?.title}</h1>
+          <p>{course?.description}</p>
         </div>
         <div>
-          <h2>&#8377;{final?.course?.price}</h2>
+          <h2>&#8377;{course?.price}</h2>
           <div className="edit-btn-row">
             <button onClick={deleteHandler}>Delete</button>
             <button
-              onClick={() => navigate(`/instructor/update-course/${courseId}`)}
+              // onClick={() => navigate(`/instructor/update-course/${courseId}`)}
             >
               Update
             </button>

@@ -54,9 +54,10 @@ export const createCourse = async (req: Request, res: Response) => {
 };
 
 export const updateCourse = async (req: Request, res: Response) => {
-  const { bodyContent } = req.body;
-  await Course.updateOne({ _id: req.params.courseId }, bodyContent);
-  res.send(`Course updated successfully`);
+  const { updateFormData } = req.body;
+  console.log(updateFormData);
+  // await Course.updateOne({ _id: req.params.courseId }, bodyContent);
+  // res.send(`Course updated successfully`);
 };
 
 export const deleteCourse = async (req: Request, res: Response) => {
@@ -71,6 +72,8 @@ export const findAuthorsCourses = async (req: Request, res: Response) => {
 
 export const getCourse = async (req: Request, res: Response) => {
   const { courseId } = req.params;
-  const find = await Course.findById(courseId);
+  // console.log(courseId);
+  const find = await Course.findById({_id : courseId});
+  // console.log(find);
   res.status(200).json(find);
 };

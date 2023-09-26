@@ -26,7 +26,6 @@ function Navbar() {
       <Link to={`/support`}>
         <div className="support-btn-wrapper">
           <span className="support-icon">
-            {/* <i className="fa-solid fa-circle-info"></i> */}
             <i className="fa-solid fa-headset"></i>
           </span>
         </div>
@@ -53,11 +52,11 @@ function Navbar() {
                 Edulab University
               </Link>
             </span>
-            <input
+            {/* <input
               type="search"
               placeholder="Tap Here to Search"
               className="search-bar"
-            />
+            /> */}
 
             {/* <button>Cart{" (0) "}</button> */}
             <a href={`/cart`}>

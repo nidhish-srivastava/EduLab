@@ -104,7 +104,7 @@ a {
 }
 
 .support-btn-wrapper{
-  position: absolute;
+  position: fixed;
   right: 15px;
   cursor: pointer;
   bottom: 15px;

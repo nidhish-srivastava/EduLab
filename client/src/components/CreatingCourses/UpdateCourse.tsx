@@ -32,9 +32,9 @@ function UpdateCourse() {
 
   return (
     <div className="update-container">
-      <input type="text" value={updateFormData.title} onChange={changeHandler}/>
-      <textarea cols={30} rows={3} value={updateFormData.description} onChange={changeHandler}/>
-      <input  type="number" value={updateFormData.price} onChange={changeHandler}/>
+      <input type="text" name="title" value={updateFormData.title} onChange={changeHandler}/>
+      <textarea cols={30} rows={3} name="description" value={updateFormData.description} onChange={changeHandler}/>
+      <input  type="number" name="price" value={updateFormData.price} onChange={changeHandler}/>
       <button onClick={updatehandler} >Update</button>
     </div>
   )

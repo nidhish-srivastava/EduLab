@@ -8,7 +8,7 @@ router.post('/',createCourse)
 router.get('/:username',findAuthorsCourses)
 router.patch('/:courseId',authenticateJwt,updateCourse)
 router.delete('/:courseId',authenticateJwt,deleteCourse)
-router.get('/:courseId',getCourse)
+router.get('/course/:courseId',getCourse)
 
 
 export default router
