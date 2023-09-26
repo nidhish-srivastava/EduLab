@@ -9,34 +9,31 @@ function HomePageCourse() {
   const final = useCourseContext();
   const [courseObject, setCourseObject] = useState<courseType>();
   const fetchCourse = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/user/${courseId}`
-    );
+    const response = await axios.get(`http://localhost:3000/user/${courseId}`);
     console.log(response.data);
     setCourseObject(response.data);
   };
 
   //* We will fetch the cartItems array,then use the find method to find courseId which matches any courseId inside the array,If matches this means we have added the item to the array,so disable the buy button
 
-  const addToCart = async() =>{
+  const addToCart = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/cart/${courseId}`,{
-        headers : {
-          "Content-Type" : "application/json",
-          Authorization : "Bearer " + localStorage.getItem("token")
+      const response = await fetch(`http://localhost:3000/cart/${courseId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
-        body : JSON.stringify({username : final?.userEmail}),
-        method : "POST"
-      })
+        body: JSON.stringify({ username: final?.userEmail }),
+        method: "POST",
+      });
       console.log(response);
       // if(response.status===403) alert("Unauthorized to Buy,Login or SignUp to buy")
       // console.log(response.data);
       // response.data.msg && alert(response.data.msg)
-    } 
-    catch (error) {
-          // alert("Login/SignUp to buy a course")      
+    } catch (error) {
+      // alert("Login/SignUp to buy a course")
     }
-  }
+  };
 
   useEffect(() => {
     fetchCourse();
@@ -46,11 +43,7 @@ function HomePageCourse() {
     <>
       <div className="individual-course-card-home-page">
         <div className="image-wrapper">
-          <img
-            src={courseObject?.imageLink}
-            alt=""
-            loading="lazy"
-          />
+          <img src={courseObject?.imageLink} alt="" loading="lazy" />
         </div>
         <div className="right-side">
           <div>

@@ -8,26 +8,24 @@ type CourseResultCardProp = {
 function CourseResultCard({ course }: CourseResultCardProp) {
   return (
     <div>
-    <Link to={`${course._id}`}>
-      <div className="course-card">
-        <div className="api-image-wrapper">
-          <img
-            src={course.imageLink}
-            alt={course.title}
-            loading="lazy"
-            className="course-img"
+      <Link to={`${course._id}`}>
+        <div className="course-card">
+          <div className="api-image-wrapper">
+            <img
+              src={course.imageLink}
+              alt={course.title}
+              loading="lazy"
+              className="course-img"
             />
+          </div>
+          <div className="content-wrapper">
+            <h3 className="title">{course.title}</h3>
+            <h4 className="author"> {course.author}</h4>
+            <h3 className="price">&#8377;{course.price}</h3>
+          </div>
         </div>
-        <div className="content-wrapper">
-        <h3 className="title" >{course.title}</h3>
-        <h4 className="author" > {course.author}</h4>
-        <h3 className="price">
-        &#8377;{course.price}
-          </h3>
-        </div>
-      </div>
-    </Link>
-            </div>
+      </Link>
+    </div>
   );
 }
 
