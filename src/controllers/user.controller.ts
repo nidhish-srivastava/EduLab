@@ -7,6 +7,7 @@ export const getAllCourses = async(req:Request,res : Response) =>{
 }
 
 export const getSingleCourse = async(req:Request,res:Response)=>{
-    const response = await Course.findById(req.params.id)
+
+    const response = await Course.findById(req.params.courseId)
     res.json(response)
 }

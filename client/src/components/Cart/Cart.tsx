@@ -1,4 +1,3 @@
-import axios from "axios"
 import {useState} from 'react'
 import {useEffect} from 'react'
 import { useCourseContext } from "../../context/context"
@@ -8,37 +7,51 @@ function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
     const [cartDocument,setCartDocument] = useState("")
     const final = useCourseContext()
-    const [render,setRender] = useState(false)
 
     const fetchCartItems = async() =>{
-        const response = await axios.get(`http://localhost:3000/cart/${final?.userEmail}`)
-        console.log(response.data);
-        setCartItemsArray(response.data.cartItems)
-        setCartDocument(response.data.cart._id)
-        final?.setCartQuantity(response.data.cartItems.length)
+        const response = await fetch(`http://localhost:3000/cart/${final?.userEmail}`)
+        const data = await response.json()
+        setCartItemsArray(data.cartItems)
+        setCartDocument(data.cart._id)
+        final?.setCartQuantity(data.cartItems.length)
     }
+
     const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
-      return acc + iti.price
+      return acc + Number(iti.price)
     },0)
 
     const removeCartItem = async(courseId : number | undefined) =>{
-      await axios.post(`http://localhost:3000/cart/${courseId}`,{
-        username : final?.userEmail,
-        cartDocumentId : cartDocument
-      })
-      setRender(e=>!e)
+      try {
+       const res =  await fetch(`http://localhost:3000/cart/${courseId}`,{
+         body : JSON.stringify({
+           username : final?.userEmail,
+           cartDocumentId : cartDocument
+         }),
+         headers : {
+           "Content-type" : "application/json",
+           Authorization : "Bearer " + localStorage.getItem("token")
+         },
+         method : "DELETE"
+       })
+       if(res.status==200){
+        window.location.reload()
+       }
+      } catch (error) {
+        
+      }
     }
 
     useEffect(()=>{
       fetchCartItems()
-    },[render])
+    },[])
+    
   return (
     <main className="cart-items-container">
       <h2 style={{fontFamily : "Montserrat,sans-serif"}}>Total Bill : &#8377;{sum} </h2>
         {cartItemsArray.map((e : courseType)=>(
           <div className="cart-item-card">
             <div className="left">
-              <img src={`http://localhost:3000/${e?.imageLink}`} alt="" />
+              <img src={e?.imageLink} loading="lazy" alt="" />
             </div>
             <div className="right">
               <div>

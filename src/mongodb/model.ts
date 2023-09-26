@@ -10,10 +10,7 @@ interface iCourse {
   description: string;
   price: number;
   imageLink: string;
-  //   published : boolean
-  // category: string;
   author: string;
-  //   authId : Types.ObjectId
 }
 
 interface iBusinessRegister {
@@ -62,7 +59,7 @@ const courseSchema = new Schema<iCourse>({
   title: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
-  // imageLink: { type: String, required: true },
+  imageLink: { type: String, required: true },
   // published : {type : Boolean},
   // category: { type: String, required: true },
 });

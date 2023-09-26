@@ -7,7 +7,7 @@ export type courseType = {
   imageLink : string;
   description: string;
   price : number | string
-  // _id?: number;
+  _id?: number;
   author?: string;
 };
 
@@ -26,9 +26,8 @@ function MyCourses() {
         }
       );
       const data = await response.json();
-      // console.log(data);
-      
-      setCoursesArray(data.courses);
+      console.log(data);
+      setCoursesArray(data);
     } catch (error) {}
   };
 
@@ -49,9 +48,9 @@ function MyCourses() {
           </div>
         </Link>
       <div className="my-courses-container">
-        {coursesArray?.map((course) => {
-          return <CourseResultCard course={course} />;
-        })}
+        {coursesArray?.map((e,i)=>(
+          <CourseResultCard course={e} key={i}/>
+        ))}
       </div>
     </>
   );

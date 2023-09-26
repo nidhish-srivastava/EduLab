@@ -60,11 +60,11 @@ function Navbar() {
             />
 
             {/* <button>Cart{" (0) "}</button> */}
-            <Link to={`/cart`}>
+            <a href={`/cart`}>
               <span className="cart-icon">
               <i className="fa-solid fa-cart-shopping"></i>
               </span>
-            </Link>
+            </a>
 
             <button
               className="logout-btn"

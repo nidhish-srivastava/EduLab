@@ -25,7 +25,6 @@ const uploadImagePromise = async (
     const imageUrl = await uploadImage(imageLink, imageId);
     return imageUrl;
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -40,20 +39,17 @@ const createCoursePromise = async(title:string,description:string,price:number,a
     })
     return await create.save()
   } catch (error) {
-    
   }
-  
 }
 
 export const createCourse = async (req: Request, res: Response) => {
   const {title,description,price,author,imageLink} = req.body
   try {
     const imageUrl = await uploadImagePromise(imageLink, imageId);
-    const create  = await createCoursePromise(title,description,price,author,imageUrl)
-    await Promise.all([imageUrl,create])
-    res.send(`Course created successfully`)
+    await createCoursePromise(title,description,price,author,imageUrl)
+    res.status(201).send(`Course created successfully`)
   } catch (error) {
-    
+    res.status(400).send(`Error while creating`)
   }
 };
 
@@ -70,11 +66,11 @@ export const deleteCourse = async (req: Request, res: Response) => {
 
 export const findAuthorsCourses = async (req: Request, res: Response) => {
   const find = await Course.find({ author: req.params.username });
-  res.json(find);
+  res.status(200).json(find)
 };
 
 export const getCourse = async (req: Request, res: Response) => {
   const { courseId } = req.params;
   const find = await Course.findById(courseId);
-  res.json(find);
+  res.status(200).json(find);
 };

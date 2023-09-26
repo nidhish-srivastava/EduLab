@@ -12,8 +12,9 @@ function CourseResultCard({ course }: CourseResultCardProp) {
       <div className="course-card">
         <div className="api-image-wrapper">
           <img
-            src={`http://localhost:3000/${course.imageLink}`}
-            alt=""
+            src={course.imageLink}
+            alt={course.title}
+            loading="lazy"
             className="course-img"
             />
         </div>

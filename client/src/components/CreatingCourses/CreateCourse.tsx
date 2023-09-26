@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useCourseContext } from "../../context/context";
 import { useNavigate } from "react-router-dom";
 // import { categoryArray } from "../../utils";
@@ -15,6 +15,7 @@ function CreateCourse() {
   const navigate = useNavigate();
   const final = useCourseContext();
   const [image, setImage] = useState(base64);
+
   const [formData, setFormData] = useState<courseType>({
     title: "",
     description: "",
@@ -32,7 +33,7 @@ function CreateCourse() {
   };
 
   //* !!!  Logic for base64 image conversion so that we can preview it as well
-  const handleImage = () => {
+  const handleImage = useCallback(() => {
     // create a file input dynamically
     const fileInput = document.createElement("input");
     fileInput.type = "file";
@@ -58,7 +59,8 @@ function CreateCourse() {
               // You upload logic goes here
               // console.log("uri", uri);
               // setFormData(prev=>({...prev,imageLink: uri}))
-              setImage(uri);
+              setImage(uri)
+              setFormData((prev) => ({ ...prev, imageLink: uri }));
             },
             "base64" // blob or base64 default base64
           );
@@ -68,19 +70,21 @@ function CreateCourse() {
     };
     // simulate a click
     fileInput.click();
-  };
+  }, []);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(`http://localhost:3000/admin`, {
-      body : JSON.stringify(formData),
-      method : "POST",
-      credentials : "include",
-      headers : {
-        "Content-Type" : "application/json"
-      }
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     });
-    console.log(res);
+    if(res.status==201){
+      alert('Course created successfully')
+      navigate("/instructor")
+    }
   };
 
   return (
@@ -97,10 +101,11 @@ function CreateCourse() {
       <textarea
         rows={3}
         cols={50}
-        name="describe"
         placeholder="Describe your Course"
         required
         onChange={handleChange}
+        name="description"
+        value={formData.description}
       />
       <input
         type="text"
@@ -112,7 +117,7 @@ function CreateCourse() {
       />
 
       <div onClick={handleImage} className="image-wrapper-course-creation">
-        <img src={image} alt="" />
+        <img src={image} alt="Default image" loading="lazy" />
       </div>
 
       {/* <div className="dropdown-row">

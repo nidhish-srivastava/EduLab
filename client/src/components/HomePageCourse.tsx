@@ -12,7 +12,7 @@ function HomePageCourse() {
     const response = await axios.get(
       `http://localhost:3000/user/${courseId}`
     );
-    // console.log(response.data);
+    console.log(response.data);
     setCourseObject(response.data);
   };
 
@@ -20,19 +20,21 @@ function HomePageCourse() {
 
   const addToCart = async() =>{
     try {
-      const response = await axios.post(`http://localhost:3000/cart/${courseId}`,{
-      username : final?.userEmail
-      },{
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+      const response = await fetch(`http://localhost:3000/cart/${courseId}`,{
+        headers : {
+          "Content-Type" : "application/json",
+          Authorization : "Bearer " + localStorage.getItem("token")
         },
+        body : JSON.stringify({username : final?.userEmail}),
+        method : "POST"
       })
-      if(response.status===403) alert("Unauthorized to Buy,Login or SignUp to buy")
-      console.log(response.data);
-      response.data.msg && alert(response.data.msg)
+      console.log(response);
+      // if(response.status===403) alert("Unauthorized to Buy,Login or SignUp to buy")
+      // console.log(response.data);
+      // response.data.msg && alert(response.data.msg)
     } 
     catch (error) {
-          alert("Login/SignUp to buy a course")      
+          // alert("Login/SignUp to buy a course")      
     }
   }
 
@@ -45,8 +47,9 @@ function HomePageCourse() {
       <div className="individual-course-card-home-page">
         <div className="image-wrapper">
           <img
-            src={`http://localhost:3000/${courseObject?.imageLink}`}
+            src={courseObject?.imageLink}
             alt=""
+            loading="lazy"
           />
         </div>
         <div className="right-side">
@@ -58,7 +61,7 @@ function HomePageCourse() {
             <h2>&#8377;{courseObject?.price}</h2>
             {courseObject?.author !== final?.userEmail && (
               <div className="buy-btn-row">
-                <button>Buy Now</button>
+                {/* <button>Buy Now</button> */}
                 <button onClick={addToCart}>Add to Cart</button>
               </div>
             )}
