@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { useCourseContext } from "../context/context";
+import toast,{Toaster} from "react-hot-toast";
 
 function HomePageCourse() {
   const { courseId } = useParams();
@@ -18,21 +19,21 @@ function HomePageCourse() {
 
   const addToCart = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/cart/${courseId}`, {
+    await fetch(`http://localhost:3000/cart/${courseId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify({ username: final?.userEmail }),
         method: "POST",
-      });
-      console.log(response);
+      })
       // if(response.status===403) alert("Unauthorized to Buy,Login or SignUp to buy")
       // console.log(response.data);
       // response.data.msg && alert(response.data.msg)
     } catch (error) {
       // alert("Login/SignUp to buy a course")
     }
+    toast.success("Course added to cart")
   };
 
   useEffect(() => {
@@ -40,7 +41,8 @@ function HomePageCourse() {
   }, []);
 
   return (
-    <>
+    <Fragment>
+      <div><Toaster/></div>
       <div className="individual-course-card-home-page">
         <div className="image-wrapper">
           <img src={courseObject?.imageLink} alt="" loading="lazy" />
@@ -61,7 +63,7 @@ function HomePageCourse() {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }
 

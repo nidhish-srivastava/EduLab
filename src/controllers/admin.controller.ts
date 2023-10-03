@@ -55,7 +55,7 @@ export const createCourse = async (req: Request, res: Response) => {
 
 export const updateCourse = async (req: Request, res: Response) => {
   const { updateFormData } = req.body;
-  console.log(updateFormData);
+  // console.log(updateFormData);
   // await Course.updateOne({ _id: req.params.courseId }, bodyContent);
   // res.send(`Course updated successfully`);
 };

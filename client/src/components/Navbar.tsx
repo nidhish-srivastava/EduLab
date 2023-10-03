@@ -93,11 +93,11 @@ function Navbar() {
                 Edulab University
               </Link>
             </span>
-            <input
+            {/* <input
               type="search"
               placeholder="Tap Here to Search"
               className="search-bar"
-            />
+            /> */}
             <Link to={`/signup`}>SignUp</Link>
             <Link to={`/signin`}>SignIn</Link>
           </div>
