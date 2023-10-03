@@ -3,7 +3,6 @@ import { useEffect, useState,Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { useCourseContext } from "../context/context";
-import toast,{Toaster} from "react-hot-toast";
 
 function HomePageCourse() {
   const { courseId } = useParams();
@@ -33,7 +32,6 @@ function HomePageCourse() {
     } catch (error) {
       // alert("Login/SignUp to buy a course")
     }
-    toast.success("Course added to cart")
   };
 
   useEffect(() => {
@@ -42,7 +40,6 @@ function HomePageCourse() {
 
   return (
     <Fragment>
-      <div><Toaster/></div>
       <div className="individual-course-card-home-page">
         <div className="image-wrapper">
           <img src={courseObject?.imageLink} alt="" loading="lazy" />
