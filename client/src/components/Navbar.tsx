@@ -36,7 +36,7 @@ function Navbar() {
         {final?.userEmail && final.userEmail.length > 1 ? (
           <>
             <Link to={`/`}>Home</Link>
-            <Link to={`/instructor`}>Instructor</Link>
+            <Link to={`/instructor`}>Create</Link>
             <span className="business-logo">
               <Link
                 to={`/edulab-business`}
