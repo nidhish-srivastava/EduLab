@@ -16,7 +16,7 @@ function Support() {
   return (
     <div className='support-page-container'>
     <div className="support-img-banner">
-        <img src={a} alt="" />
+        <img src={a} alt="" loading='lazy' />
     </div>
     <div className="input-bar-container">
         <label htmlFor=""  >How Can we Help You?</label>

@@ -5,7 +5,7 @@ function Profile() {
   return (
     <main className='profile-page-container'>
         <div className="profile-image-wrapper">
-            <img src={a} alt="" />
+            <img src={a} alt="" loading='lazy' />
         </div>
         <h3>Hello {final?.userEmail}</h3>
     </main>

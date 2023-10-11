@@ -1,6 +1,15 @@
 import { Request, Response } from "express";
 import { Cart } from "../mongodb/model";
 
+
+export const checkCourseInCart = async(req:Request,res:Response) =>{
+  const {courseId,username} = req.params
+  const response = await Cart.findOne({username : username})
+  const data = response?.courses.find(e=>e.course==courseId)
+  if(data == undefined) res.json(true)
+  else res.json(false)
+}
+
 export const purchase = async (req: Request, res: Response) => {
   const { courseId } = req.params;
   const { username } = req.body;
@@ -17,7 +26,7 @@ export const purchase = async (req: Request, res: Response) => {
   const courseInCart = cart.courses.find(
     (item) => item.course.toString() === courseId
   );
-  console.log(courseInCart);
+  // console.log(courseInCart);
   if (courseInCart) {
     res.json({ msg: "Course already inside cart" });
     return; //* if we dont return then it will show error coz of the save method after the if else construct

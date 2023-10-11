@@ -16,7 +16,7 @@ function Instructor() {
       </Link>
     </div>
     <div className="image-wrapper-create">
-    <img src={a} alt=""  />
+    <img src={a} alt="" loading="lazy" />
     </div>
     </>
   );

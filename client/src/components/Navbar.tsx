@@ -13,7 +13,6 @@ function Navbar() {
       },
     });
     const data = await response.json();
-    console.log(data);
     final?.setUserEmail(data.username);
   };
 
@@ -31,7 +30,9 @@ function Navbar() {
         </div>
       </Link>
       <div className="nav-bar">
+        <Link to={`/`}>
         <span className="logo">EduLab</span>
+        </Link>
         {final?.userEmail && final.userEmail.length > 1 ? (
           <>
             <Link to={`/`}>Home</Link>
@@ -52,12 +53,6 @@ function Navbar() {
                 Edulab University
               </Link>
             </span>
-            {/* <input
-              type="search"
-              placeholder="Tap Here to Search"
-              className="search-bar"
-            /> */}
-
             {/* <button>Cart{" (0) "}</button> */}
             <a href={`/cart`}>
               <span className="cart-icon">
@@ -76,7 +71,7 @@ function Navbar() {
             </button>
             <Link to={`/my-profile`}>
               <div className="dp-small-wrapper">
-                <img src={a} alt="" />
+                <img src={a} alt="" loading="lazy" />
               </div>
             </Link>
           </>

@@ -35,7 +35,7 @@ function Course() {
   return (
     <div className="individual-course-card-home-page">
       <div className="image-wrapper">
-        <img src={course?.imageLink} alt="" />
+        <img src={course?.imageLink} alt="" loading="lazy" />
       </div>
       <div className="right-side">
         <div>

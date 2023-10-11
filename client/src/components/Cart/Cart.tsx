@@ -13,7 +13,6 @@ function Cart() {
         const data = await response.json()
         setCartItemsArray(data.cartItems)
         setCartDocument(data.cart._id)
-        final?.setCartQuantity(data.cartItems.length)
     }
 
     const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
