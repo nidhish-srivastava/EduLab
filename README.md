@@ -5,7 +5,7 @@ This platform is like marketplace.You can create courses as well as sell courses
 ## Technologies Used
 
   - [Next.js](https://nextjs.org/) , [ExpressJs](https://expressjs.com/) - Framework <!--- [Tailwind CSS](https://tailwindcss.com/) , [shadcn/ui](https://ui.shadcn.com/) - Styling-->
-  - [Pure CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Styling
+  - [Sass](https://sass-lang.com/) - Styling
   - [Typescipt](https://www.typescriptlang.org/) - Language
     <!--  - [react-hook-form](https://www.react-hook-form.com/) -->
   - [MongoDB](https://www.mongodb.com/) - Database
