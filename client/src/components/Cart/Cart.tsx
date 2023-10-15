@@ -2,29 +2,25 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import { useCourseContext } from "../../context/context"
 import { courseType } from "../CreatingCourses/MyCourses"
+import { useMemo } from 'react'
 
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
-    const [cartDocument,setCartDocument] = useState("")
+    const [cartDocumentId,setCartDocumentId] = useState("")
     const final = useCourseContext()
-
-    const fetchCartItems = async() =>{
-        const response = await fetch(`http://localhost:3000/cart/${final?.userEmail}`)
-        const data = await response.json()
-        setCartItemsArray(data.cartItems)
-        setCartDocument(data.cart._id)
-    }
-
-    const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
-      return acc + Number(iti.price)
-    },0)
+    
+    const sum  = useMemo(()=>{
+     return cartItemsArray.reduce((acc,iti : courseType)=>{
+       return acc + Number(iti.price)
+     },0)
+    },[])
 
     const removeCartItem = async(courseId : number | undefined) =>{
       try {
        const res =  await fetch(`http://localhost:3000/cart/${courseId}`,{
          body : JSON.stringify({
            username : final?.userEmail,
-           cartDocumentId : cartDocument
+           cartDocumentId : cartDocumentId
          }),
          headers : {
            "Content-type" : "application/json",
@@ -39,8 +35,14 @@ function Cart() {
         
       }
     }
-
+    
     useEffect(()=>{
+          const fetchCartItems = async() =>{
+              const response = await fetch(`http://localhost:3000/cart/${final?.userEmail}`)
+              const data = await response.json()
+              setCartItemsArray(data.cartItems)
+              setCartDocumentId(data.cart._id)
+          }
       fetchCartItems()
     },[])
     
@@ -65,6 +67,11 @@ function Cart() {
             </span>
           </div>
         ))}
+        <button className='payment-proceed-btn'>
+        <a href={`/payment`} >
+          Proceed to payment
+        </a>
+          </button>
     </main>
   )
 }

@@ -552,3 +552,34 @@ background-color: rgb(17, 233, 100);
   width: 20%;
   margin: 0 auto;
 }
+
+.payment-proceed-btn{
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  border: none;
+  color: white;
+  background: rgb(5, 118, 211);
+  cursor: pointer;
+}
+
+
+.payment-form{
+    width: 20%;
+    margin: 0 auto;
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+}
+
+}
