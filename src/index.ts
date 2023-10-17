@@ -7,7 +7,9 @@ import cartRouter from './routes/cart.route'
 const app = express();
 import dotenv from "dotenv";
 dotenv.config();
+import { connectmongodb } from "./mongodb/connect";
 import { v2 as cloudinary } from "cloudinary";
+const port = process.env.PORT || 4000
 const corsOptions = {
   origin: "http://localhost:5173",
   credentials: true,
@@ -23,7 +25,14 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
+const start = async() =>{
+    connectmongodb()
+    app.listen(port,()=>{
+        console.log(`Server is listening at port ${port}`);
+    })
+}
 
+start()
 
 app.get("/", (req:Request, res:Response) => {
   res.send(`Welcome to Edulab`);

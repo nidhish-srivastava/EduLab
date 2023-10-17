@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import { Cart } from "../mongodb/model";
 
+export const cartItemsLength = async(req:Request,res:Response)=>{
+  const {username} = req.params
+  const response = await Cart.findOne({username : username})
+  const data = response?.courses.length
+  res.json(data)
+}
 
 export const checkCourseInCart = async(req:Request,res:Response) =>{
   const {courseId,username} = req.params

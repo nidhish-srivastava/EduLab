@@ -16,12 +16,21 @@ function Navbar() {
     final?.setUserEmail(data.username);
   };
 
+  const cartItems = async()=>{
+    const response = await fetch(`http://localhost:3000/cart/cartItemsLength/${final?.userEmail}`, {
+      method: "GET",
+    });
+    const data = await response.json()
+    
+  }
+
   useEffect(() => {
     check();
   }, []);
 
   return (
     <Fragment>
+      <button onClick={cartItems}>Casd</button>
       <Link to={`/support`}>
         <div className="support-btn-wrapper">
           <span className="support-icon">

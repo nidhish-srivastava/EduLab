@@ -2,18 +2,15 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import { useCourseContext } from "../../context/context"
 import { courseType } from "../CreatingCourses/MyCourses"
-import { useMemo } from 'react'
 
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
     const [cartDocumentId,setCartDocumentId] = useState("")
     const final = useCourseContext()
     
-    const sum  = useMemo(()=>{
-     return cartItemsArray.reduce((acc,iti : courseType)=>{
+    const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
        return acc + Number(iti.price)
      },0)
-    },[])
 
     const removeCartItem = async(courseId : number | undefined) =>{
       try {
@@ -40,6 +37,7 @@ function Cart() {
           const fetchCartItems = async() =>{
               const response = await fetch(`http://localhost:3000/cart/${final?.userEmail}`)
               const data = await response.json()
+              // console.log(data);
               setCartItemsArray(data.cartItems)
               setCartDocumentId(data.cart._id)
           }
