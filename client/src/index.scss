@@ -27,18 +27,18 @@ a {
   min-height: 100vh;
 }
 
-
-
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   font-size: 1.1rem;
 }
 
-
+.white{
+  color: white;
+}
 
 .logo {
   text-align: center;
@@ -50,68 +50,65 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
+.sign-in-row a {
+  background-color: #1463cb;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 1rem;
+  border: none;
+  font-size: 1.1rem;
+}
 
-.sign-in-row a{
-     background-color: #1463cb;
-     color: white;
-     padding: 0.5rem 0.8rem;
-     border-radius: 1rem;
-     border: none;
-     font-size: 1.1rem;
-   }
-
-  .business-logo {
-    margin-right: auto;
-    a{
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      background-color: lightgreen;
-      color: black;
-    }
+.business-logo {
+  margin-right: auto;
+  a {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    background-color: lightgreen;
+    color: black;
   }
-  
-  .logout-btn {
-    margin-left: auto;
-    padding: 0.8rem;
-    font-size: 1.2rem;
-    border: none;
-    cursor: pointer;
-    font-family: "Montserrat", sans-serif;
-  }
+}
 
-  
-.dp-small-wrapper{
+.logout-btn {
+  margin-left: auto;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 1rem;
+  background-color: red;
+  color: white;
+}
+.dp-small-wrapper {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 2rem;
   overflow: hidden;
 }
 
-.dp-small-wrapper img{
+.dp-small-wrapper img {
   width: 100%;
 }
 
-
-
-.hamburger{
+.hamburger {
   display: none;
 }
 
-
-.sign-in-row ,.sign-out-row{
+.sign-in-row,
+.sign-out-row {
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 0 1rem;
   justify-content: flex-end;
   width: 100%;
-  font-family: "Montserrat",sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-@media (max-width:"600px") {
-  .hidden{
+
+@media (max-width: "800px") {
+  .hidden {
     display: none;
   }
   .hamburger {
@@ -121,7 +118,8 @@ a {
     right: 1rem;
     z-index: 2000;
   }
-  .sign-in-row,.sign-out-row{
+  .sign-in-row,
+  .sign-out-row {
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -134,35 +132,33 @@ a {
     width: 100%;
     height: 50%;
     z-index: 1000;
-    transition: .1s;
+    transition: 0.1s;
   }
-  .logout-btn{
+  .logout-btn {
     margin: 0 auto;
   }
-  .logo{
+  .logo {
     display: block;
   }
-  .business-logo{
+  .business-logo {
     margin: 0 auto;
   }
 }
 
-// Search bar 
+// Search bar
 
 .search-bar {
   padding: 0.5rem 0.7rem;
   border-radius: 1rem;
   border: none;
-  width: 23%;
   font-size: 1.03rem;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+  width: 60%;
 }
-
-
 
 // Support Button
 
-.support-btn-wrapper{
+.support-btn-wrapper {
   position: fixed;
   right: 15px;
   cursor: pointer;
@@ -174,16 +170,9 @@ a {
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.support-icon{
+.support-icon {
   font-size: 1.6rem;
 }
-
-
-
-
-
-
-
 
 /* FORM */
 .form {
@@ -223,33 +212,34 @@ a {
   cursor: pointer;
 }
 
-
-
 /* Course-Card */
-.courses-container,.my-courses-container {
-  display: grid;
-  grid-template-columns: repeat(3, 35%); /* Adjust as needed */
-  gap: 10px; /* Adjust the gap between grid items */
+.courses-container,
+.my-courses-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 2rem auto;
   font-family: "Poppins", sans-serif;
-  padding: 3rem;
-  overflow: hidden;
-  margin-left: 6rem;
+  gap: 2rem;
 }
-
 
 .course-card {
   display: flex;
   flex-direction: column;
   padding: 1rem;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-  width: 40%;
+  width: 80%;
+  align-items: start;
+  margin: 0 auto;
 }
 
 .api-image-wrapper {
-  width: 100%;
+  width: 80%;
 }
 
-.course-card .api-image-wrapper img {
+.api-image-wrapper img {
   width: 100%;
 }
 
@@ -268,8 +258,8 @@ a {
   font-size: 1.08rem;
 }
 
-/* INDIVUAL COURSE AFTER AFTER CLICKING ON HOME PAGE COURSE CARD */
 
+/* INDIVUAL COURSE AFTER AFTER CLICKING ON HOME PAGE COURSE CARD */
 .individual-course-card-home-page {
   display: flex;
   align-items: center;
@@ -295,7 +285,6 @@ a {
   /* align-items: flex-start; */
   gap: 7rem;
 }
-
 
 .buy-btn-row {
   display: flex;
@@ -333,7 +322,7 @@ a {
   cursor: pointer;
 }
 
-img{
+img {
   width: 100%;
   display: block;
 }
@@ -345,7 +334,7 @@ img{
   place-items: center;
 }
 
-.edit-btn-row{
+.edit-btn-row {
   display: flex;
   padding: 1rem;
   justify-content: center;
@@ -353,7 +342,7 @@ img{
   gap: 2rem;
 }
 
-.edit-btn-row button{
+.edit-btn-row button {
   padding: 1rem;
   font-size: 1.1rem;
   border-radius: 6px;
@@ -362,7 +351,7 @@ img{
   cursor: pointer;
 }
 
-.start-creating-btn{
+.start-creating-btn {
   padding: 1rem;
   font-size: 1.1rem;
   border-radius: 6px;
@@ -370,12 +359,10 @@ img{
   background-color: #82cb14;
   cursor: pointer;
   color: white;
-  
 }
 
-
 /* UPDATE CONTAINER | Create-Container */
-.update-container{
+.update-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -383,68 +370,67 @@ img{
   gap: 2rem;
 }
 
-.update-container input{
+.update-container input {
   width: 80%;
-  padding: .7rem;
+  padding: 0.7rem;
   font-size: 1.2rem;
   border: none;
   background-color: transparent;
 }
 
-.dropdown-row{
+.dropdown-row {
   display: flex;
   gap: 2rem;
 }
 
-.dropdown-row label{
+.dropdown-row label {
   font-size: 1.1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.dropdown-row select{
-  padding: .41rem;
+.dropdown-row select {
+  padding: 0.41rem;
   font-size: 1.1rem;
 }
 
-
-.update-container textarea{
+.update-container textarea {
   font-size: 1.2rem;
   resize: none;
-  padding: .7rem;
+  padding: 0.7rem;
   width: 100%;
   border: none;
   background-color: transparent;
 }
 
-.update-container button{
-  margin : 0 auto;
+.update-container button {
+  margin: 0 auto;
   background-color: lightgreen;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   border: none;
   border-radius: 5px;
-  padding: .8rem;
+  padding: 0.8rem;
   font-size: 1.2rem;
   cursor: pointer;
 }
 
-
 /* SUPPORT */
 
-.support-page-container{
+.support-page-container {
   /* margin-top: 3rem; */
 }
 
-.support-img-banner{
+.support-img-banner {
   width: 80%;
-  margin: 0  auto;
+  margin: 0 auto;
 }
 
-.support-img-banner img{
+.support-img-banner img {
   width: 100%;
   display: block;
 }
 
-.input-bar-container{
+.input-bar-container {
   border-radius: 10px;
   padding: 1.5rem 4rem;
   width: 100%;
@@ -452,19 +438,19 @@ img{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .51rem;
+  gap: 0.51rem;
 }
 
-.input-bar-container label{
+.input-bar-container label {
   font-size: 2rem;
   display: block;
   margin-bottom: 1rem;
 }
 
-.input-bar-container textarea{
+.input-bar-container textarea {
   resize: none;
   font-size: 1.1rem;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
   width: 100%;
   background-color: transparent;
   border: none;
@@ -474,8 +460,8 @@ img{
   padding: 1rem;
 }
 
-.input-bar-container button{
-  padding:.5rem 1rem;
+.input-bar-container button {
+  padding: 0.5rem 1rem;
   font-size: 1.1rem;
   border-radius: 4px;
   border: none;
@@ -484,63 +470,65 @@ img{
   cursor: pointer;
 }
 
-.business-page-container{
+.business-page-container {
   display: flex;
   padding: 1rem;
 }
 
-.left-side-business-page{
+.left-side-business-page {
   display: flex;
   flex-direction: column;
   width: 50%;
-  font-family: 'Poppins',sans-serif;
+  font-family: "Poppins", sans-serif;
   gap: 2.4rem;
   padding: 1rem;
 }
 
-.form-container-business{
+.form-container-business {
   width: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.4rem;
-  font-family: 'Poppins',sans-serif;
+  font-family: "Poppins", sans-serif;
   align-items: flex-start;
   padding: 1.6rem;
   font-size: 1.2rem;
 }
 
-.form-container-business input,.form-container-business select,.form-container-business button{
-  font-family: 'Poppins',sans-serif;
-  font-size: 1.1rem;}
+.form-container-business input,
+.form-container-business select,
+.form-container-business button {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+}
 
-.form-container-business button{
+.form-container-business button {
   margin-left: 14rem;
   margin-top: 1rem;
   width: 50%;
-  padding: .7rem;
+  padding: 0.7rem;
   background-color: #2e86f8;
   font-size: 1.1rem;
   color: white;
   border: none;
 }
 
-
-.profile-page-container{
+.profile-page-container {
   margin-top: 2rem;
-  font-family: 'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.profile-image-wrapper{
+.profile-image-wrapper {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   overflow: hidden;
 }
 
-.profile-image-wrapper img{
+.profile-image-wrapper img {
   width: 100%;
   object-fit: contain;
   object-position: center;
@@ -548,22 +536,22 @@ img{
 
 /* REgister business Response  */
 
-.business-register-container{
-  font-family: 'Montserrat',sans-serif;
+.business-register-container {
+  font-family: "Montserrat", sans-serif;
   font-size: 2rem;
   padding: 4rem;
   display: grid;
 }
 
-.business-register-container .modal{
-width: 600px;
-min-height: 300px;
-padding: 3rem;
-border-radius: 3rem;
-background-color: rgb(17, 233, 100);
+.business-register-container .modal {
+  width: 600px;
+  min-height: 300px;
+  padding: 3rem;
+  border-radius: 3rem;
+  background-color: rgb(17, 233, 100);
 }
 
-.cart-items-container{
+.cart-items-container {
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -572,39 +560,38 @@ background-color: rgb(17, 233, 100);
   padding: 3rem;
 }
 
-.cart-item-card{
+.cart-item-card {
   display: flex;
   gap: 5rem;
-  font-family: 'Poppins',sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-.cart-items-container .left{
-   width: 20%;
+.cart-items-container .left {
+  width: 20%;
 }
 
-.cart-items-container .left img{
+.cart-items-container .left img {
   width: 100%;
   display: block;
 }
 
-.cart-items-container .right{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    /* align-items: ; */
+.cart-items-container .right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* align-items: ; */
 }
 
-.remove-course{
+.remove-course {
   height: fit-content;
 }
 
-
-.image-wrapper-course-creation{
+.image-wrapper-course-creation {
   width: 20%;
   margin: 0 auto;
 }
 
-.payment-proceed-btn{
+.payment-proceed-btn {
   width: fit-content;
   margin: 0 auto;
   font-size: 1.2rem;
@@ -616,21 +603,42 @@ background-color: rgb(17, 233, 100);
   cursor: pointer;
 }
 
+.payment-form {
+  width: 20%;
+  margin: 0 auto;
 
-.payment-form{
-    width: 20%;
-    margin: 0 auto;
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
+  button {
+    width: 100%;
+    padding: 10px;
+  }
 }
 
-button {
-  width: 100%;
-  padding: 10px;
+
+@media (min-width: "760px") {
+  .search-bar {
+    width: 40%;
+  }
+  .courses-container{
+  display: grid;
+  grid-template-columns: repeat(3, 35%); /* Adjust as needed */
+  grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+  gap: 10px; /* Adjust the gap between grid items */
+  place-items : center;
+  }
 }
 
+@media (min-width: "1280px") {
+  .search-bar {
+    width: 30%;
+  }
+  .sign-in-row,.sign-out-row{
+    font-size: 1.3rem;
+  }
 }

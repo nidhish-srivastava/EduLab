@@ -49,25 +49,25 @@ function Navbar() {
         </span>
         }
         {final?.userEmail && final.userEmail.length > 1 ? (
-          <div className ={` sign-out-row ${!toggle ? "hidden" : ""}`} onClick={()=>setToggle(false)}>
+          <div className ={` sign-out-row ${!toggle ? "hidden" : "white"}`} onClick={()=>setToggle(false)}>
             <Link to={`/`}>Home</Link>
             <Link to={`/instructor`}>Create</Link>
-            <span className="business-logo">
+            {/* <span className="business-logo">
               <Link
                 to={`/edulab-business`}
                 style={{ padding: ".6rem", borderRadius: "10px" }}
               >
                 Edulab Business
               </Link>
-            </span>
-            <span className="business-logo">
+            </span> */}
+            {/* <span className="business-logo">
               <Link
                 to={`/edulab-university`}
                 style={{ padding: ".6rem", borderRadius: "10px" }}
               >
                 Edulab University
               </Link>
-            </span>
+            </span> */}
             {/* <button>Cart{" (0) "}</button> */}
             <a href={`/cart`}>
               <span className="cart-icon">
@@ -91,8 +91,8 @@ function Navbar() {
             </Link>
           </div>
         ) : (
-          <div className ={` sign-in-row ${!toggle ? "hidden" : ""}`} onClick={()=>setToggle(false)}>
-            <span className="business-logo">
+          <div className ={` sign-in-row ${!toggle ? "hidden" : "white"}`} onClick={()=>setToggle(false)}>
+            {/* <span className="business-logo">
               <Link to={`/edulab-business`}>Edulab Business</Link>
             </span>
             <span className="business-logo">
@@ -102,7 +102,7 @@ function Navbar() {
                 >
                 Edulab University
               </Link>
-            </span>
+            </span> */}
             <Link to={`/signup`}>SignUp</Link>
             <Link to={`/signin`}>SignIn</Link>
           </div>

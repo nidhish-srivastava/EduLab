@@ -28,10 +28,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/:courseId" element={<HomePageCourse />} />
           <Route path="/cart" element = {<Cart/>} />
-          <Route path="/payment" element = {<Payment/>} />
+          {/* <Route path="/payment" element = {<Payment/>} /> */}
           <Route path="/edulab-business" element={<Business />} />
           <Route path="/edulab-university" element = {<University/>} />
-
           <Route  path="/instructor" element={<Instructor />} />
           <Route path="/instructor/my-courses" element={<MyCourses />} />
           <Route path="/instructor/create-course" element={<CreateCourse />} />

@@ -7,7 +7,6 @@ type CourseResultCardProp = {
 
 function CourseResultCard({ course }: CourseResultCardProp) {
   return (
-    <div>
       <Link to={`${course._id}`}>
         <div className="course-card">
           <div className="api-image-wrapper">
@@ -15,7 +14,6 @@ function CourseResultCard({ course }: CourseResultCardProp) {
               src={course.imageLink}
               alt={course.title}
               loading="lazy"
-              className="course-img"
             />
           </div>
           <div className="content-wrapper">
@@ -25,7 +23,6 @@ function CourseResultCard({ course }: CourseResultCardProp) {
           </div>
         </div>
       </Link>
-    </div>
   );
 }
 

@@ -65,11 +65,11 @@ function Cart() {
             </span>
           </div>
         ))}
-        <button className='payment-proceed-btn'>
+        {/* <button className='payment-proceed-btn'>
         <a href={`/payment`} >
           Proceed to payment
         </a>
-          </button>
+          </button> */}
     </main>
   )
 }
