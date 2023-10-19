@@ -32,8 +32,7 @@ export const purchase = async (req: Request, res: Response) => {
   const courseInCart = cart.courses.find(
     (item) => item.course.toString() === courseId
   );
-  // console.log(courseInCart);
-  if (courseInCart) {
+  if (courseInCart?.course.toString().length ?? 0 >1) {
     res.json({ msg: "Course already inside cart" });
     return; //* if we dont return then it will show error coz of the save method after the if else construct
   }

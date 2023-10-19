@@ -3,6 +3,20 @@ import {useEffect} from 'react'
 import { useCourseContext } from "../../context/context"
 import { courseType } from "../CreatingCourses/MyCourses"
 
+export const removeFromCartPromise = async(courseId : number | undefined,username : string | undefined,cartDocumentId : string) =>{
+  return await fetch(`http://localhost:3000/cart/${courseId}`,{
+    body : JSON.stringify({
+      username : username,
+      cartDocumentId : cartDocumentId
+    }),
+    headers : {
+      "Content-type" : "application/json",
+      Authorization : "Bearer " + localStorage.getItem("token")
+    },
+    method : "DELETE"
+  })
+}
+
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
     const [cartDocumentId,setCartDocumentId] = useState("")
@@ -14,18 +28,8 @@ function Cart() {
 
     const removeCartItem = async(courseId : number | undefined) =>{
       try {
-       const res =  await fetch(`http://localhost:3000/cart/${courseId}`,{
-         body : JSON.stringify({
-           username : final?.userEmail,
-           cartDocumentId : cartDocumentId
-         }),
-         headers : {
-           "Content-type" : "application/json",
-           Authorization : "Bearer " + localStorage.getItem("token")
-         },
-         method : "DELETE"
-       })
-       if(res.status==200){
+        const response = await removeFromCartPromise(courseId,final?.userEmail,cartDocumentId)
+       if(response.status==200){
         window.location.reload()
        }
       } catch (error) {

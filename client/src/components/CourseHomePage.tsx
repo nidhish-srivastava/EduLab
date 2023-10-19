@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCourseContext } from "../context/context";
 import { useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
+import { removeFromCartPromise } from "./Cart/Cart";
 
 
 const CourseHomePage = () => {
@@ -29,7 +30,7 @@ const CourseHomePage = () => {
       return
     }
     try {
-      await fetch(`http://localhost:3000/cart/${courseId}`, {
+      const res = await fetch(`http://localhost:3000/cart/${courseId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -37,10 +38,22 @@ const CourseHomePage = () => {
         body: JSON.stringify({ username: final?.userEmail }),
         method: "POST",
       });
+      console.log(res)
     } catch (error) {
       // alert("Login/SignUp to buy a course");
     }
   };
+
+  const buy = () =>{
+    if(final?.userEmail.length == 0) {
+      alert("Login to purchase")
+      return
+    }
+  }
+
+  const removeFromCart = async(courseId : number | undefined) =>{
+    const response = await removeFromCartPromise(courseId,final?.userEmail,cartDocumentId)
+  }
   
   useEffect(() => {
     const fetchCartItemsHandler = async () => {
@@ -51,7 +64,6 @@ const CourseHomePage = () => {
         // Introduce a delay using setTimeout
         const timerId = setTimeout(async () => {
           const loggedInUserCartCheckResult = await loggedInUserCartCheckPromise();
-          console.log(loggedInUserCartCheckResult);
           setCheck(loggedInUserCartCheckResult)
         }, 10); // Adjust the delay time (in milliseconds) as needed
         return ()=> clearTimeout(timerId)
@@ -76,14 +88,18 @@ const CourseHomePage = () => {
       </div>
       <div>
         <h2>&#8377;{courseObject?.price}</h2>
+        {
+          final?.userEmail != courseObject?.author &&
           <div className="buy-btn-row">
+            <button onClick={buy}>Buy Now</button>
             {!check ? 
             <button onClick={addToCart}>
             Add to cart
             </button>
-            : <button>Remove from Cart</button>
+            : <button onClick={()=>removeFromCart(courseObject?._id)}>Remove from Cart</button>
           }
           </div>
+          }
       </div>
     </div>
   </div>
