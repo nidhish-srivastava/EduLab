@@ -22,6 +22,7 @@ function SignUp() {
   };
   return (
     <form onSubmit={submitHandler} className="form">
+        <h2 className="center">Sign Up</h2>
       <input
         required
         autoFocus={true}

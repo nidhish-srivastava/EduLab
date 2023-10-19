@@ -35,7 +35,7 @@ function Home() {
         <input
           value={searchTerm}
           type="search"
-          placeholder="Tap Here to Search"
+          placeholder="Search based on course name"
           className="search-bar"
           onChange={(e) => setSearchTerm(e.target.value)}
         />

@@ -30,19 +30,19 @@ function Navbar() {
 
   return (
     <Fragment>
-      <Link to={`/support`}>
+      {/* <Link to={`/support`}>
         <div className="support-btn-wrapper">
           <span className="support-icon">
             <i className="fa-solid fa-headset"></i>
           </span>
         </div>
-      </Link>
+      </Link> */}
       <div className="navbar">
         <Link to={`/`}>
         <span className="logo">EduLab</span>
         </Link>
         {
-          <span className="hamburger" onClick={()=>setToggle(e=>!e)}>
+          <span className={`hamburger ${!toggle ? "hidden" : "white"} `} onClick={()=>setToggle(e=>!e)}>
             <svg style={{height : "1rem",width : "1rem"}} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
         </svg>

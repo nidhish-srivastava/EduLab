@@ -14,7 +14,8 @@ import Support from "./components/HelpDesk/Support";
 import Profile from './components/Profile'
 import University from "./components/University/University";
 import Cart from "./components/Cart/Cart";
-import Payment from "./components/Cart/Payment";
+import CourseHomePage from "./components/CourseHomePage";
+// import Payment from "./components/Cart/Payment";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />
-          <Route path="/:courseId" element={<HomePageCourse />} />
+          {/* <Route path="/:courseId" element={<HomePageCourse />} /> */}
+          <Route path="/:courseId" element = {<CourseHomePage/>} />
           <Route path="/cart" element = {<Cart/>} />
           {/* <Route path="/payment" element = {<Payment/>} /> */}
           <Route path="/edulab-business" element={<Business />} />

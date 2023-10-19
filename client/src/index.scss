@@ -23,6 +23,11 @@ a {
   color: inherit;
 }
 
+.center{
+  font-family: "Montserrat",sans-serif;
+  text-align: center;
+}
+
 .main-app-container {
   min-height: 100vh;
 }
@@ -625,7 +630,7 @@ img {
   .search-bar {
     width: 40%;
   }
-  .courses-container{
+  .courses-container,.my-courses-container{
   display: grid;
   grid-template-columns: repeat(3, 35%); /* Adjust as needed */
   grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));

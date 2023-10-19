@@ -25,6 +25,7 @@ function SignIn() {
 
   return (
     <form onSubmit={submitHandler} className="form">
+        <h2 className="center">Sign In</h2>
         <input required autoFocus = {true} placeholder="username" type="username" onChange={e=>setUsername(e.target.value)} value={username} />
         <div className="password-input">
         <input required type={show ? "text" : "password"} placeholder="password" value={password} onChange={e=>setPassword(e.target.value)} />

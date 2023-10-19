@@ -12,8 +12,8 @@ export const checkCourseInCart = async(req:Request,res:Response) =>{
   const {courseId,username} = req.params
   const response = await Cart.findOne({username : username})
   const data = response?.courses.find(e=>e.course==courseId)
-  if(data == undefined) res.json(true)
-  else res.json(false)
+  if(data == undefined) res.json(false)
+  else res.json(true)
 }
 
 export const purchase = async (req: Request, res: Response) => {
