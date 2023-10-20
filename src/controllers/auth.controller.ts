@@ -20,6 +20,7 @@ export const getProfile =  async (req : Request, res : Response) => {
 
 export const signup =async(req:Request,res : Response)=>{
     const {username,password} = req.body
+    console.log(req.body);
     const check = await Auth.findOne({username})
     if(check){
         res.status(403).json({ message: "User already exists" })
@@ -36,10 +37,13 @@ export const login =async(req:Request,res : Response)=>{
     const admin = await Auth.findOne({username})
     if (admin) {
         bcrypt.compare(password, admin?.password, function (err, info) {
-            if (err)  res.status(401).json("password doesnt match")
+            if (err)  res.status(500).json("Server error")
             if (info) {
                 const token = jwt.sign({ username, role: 'admin' }, process.env.SECRET || "", { expiresIn: '1h' })
                 res.json({ message: 'Logged in successfully', token, admin });
+            }
+            else{
+                res.status(400).json({message : "Password not matching"})
             }
         })
     }

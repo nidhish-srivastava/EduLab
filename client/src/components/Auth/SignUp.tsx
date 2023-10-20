@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -10,14 +9,20 @@ function SignUp() {
   const submitHandler = async (e: any) => {
     e.preventDefault();
     if (confirmPassword == password) {
-      const response = await axios.post(`http://localhost:3000/auth/signup`, {
-        username: username,
-        password: password,
+      const response = await fetch(`http://localhost:3000/auth/signup`, {
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+        method : "POST",
+        headers : {
+          "Content-Type" : "application/json"
+        }
       });
-      localStorage.setItem("token", response.data.token);
-      // window.location.href = "/signin"  // causing the window to relaod
-      window.location.href = "/"; // causing the window to relaod
-      alert("Account created successfully")
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      alert("Account created Successfully");
+      window.location.href = "/";
     } else alert("Password not matching");
   };
   return (

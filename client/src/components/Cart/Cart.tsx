@@ -26,26 +26,29 @@ function Cart() {
        return acc + Number(iti.price)
      },0)
 
-    const removeCartItem = async(courseId : number | undefined) =>{
-      try {
-        const response = await removeFromCartPromise(courseId,final?.userEmail,cartDocumentId)
-       if(response.status==200){
-        window.location.reload()
-       }
+     const fetchCartItems = async():Promise<any> =>{
+      const response = await fetch(`http://localhost:3000/cart/${final?.userName}`)
+      return response.json()
+     }
+     
+     const removeCartItem = async(courseId : number | undefined) =>{
+       try {
+        const response = await removeFromCartPromise(courseId,final?.userName,cartDocumentId)
+        if(response.status==200){
+          window.location.reload()
+        }
       } catch (error) {
         
       }
     }
     
     useEffect(()=>{
-          const fetchCartItems = async() =>{
-              const response = await fetch(`http://localhost:3000/cart/${final?.userEmail}`)
-              const data = await response.json()
-              // console.log(data);
-              setCartItemsArray(data.cartItems)
-              setCartDocumentId(data.cart._id)
-          }
-      fetchCartItems()
+      const fetchCartItemsHandler = async() =>{
+          const data = await fetchCartItems()
+          setCartItemsArray(data.cartItems)
+          setCartDocumentId(data.cart._id)
+      }
+      fetchCartItemsHandler()
     },[])
     
   return (

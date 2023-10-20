@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { Cart } from "../mongodb/model";
 
-export const cartItemsLength = async(req:Request,res:Response)=>{
-  const {username} = req.params
-  const response = await Cart.findOne({username : username})
-  const data = response?.courses.length
-  res.json(data)
+export const cartCheck = async(req:Request,res:Response)=>{
+  try {
+    const {username} = req.params
+    const response = await Cart.findOne({username : username})
+    res.json(response)
+  } catch (error) {
+    
+  }
 }
 
 export const checkCourseInCart = async(req:Request,res:Response) =>{
@@ -40,6 +43,7 @@ export const purchase = async (req: Request, res: Response) => {
   }
   try {
     await cart.save()
+    res.send("Item added to cart")
   } catch (error) {
       console.log(error);
       res.status(500).json("Server error")

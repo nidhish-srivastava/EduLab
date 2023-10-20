@@ -6,27 +6,54 @@ import a from "../blank.jpg";
 function Navbar() {
   const final = useCourseContext();
   const [toggle,setToggle] = useState(false)
-  const check = async () => {
-    const response = await fetch(`http://localhost:3000/auth/me`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    const data = await response.json();
-    final?.setUserEmail(data.username);
+  const check = async (): Promise<any> => {
+    try {
+      const response = await fetch(`http://localhost:3000/auth/me`, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const checkProfile = await response.json();
+      final?.setuserName(checkProfile.username); // Set the username here
+      return checkProfile;
+    } catch (error) {
+      console.error("Error in check:", error);
+      throw error; // Rethrow the error to prevent cartItems from executing
+    }
   };
-
-  const cartItems = async()=>{
-    const response = await fetch(`http://localhost:3000/cart/cartItemsLength/${final?.userEmail}`, {
-      method: "GET",
-    });
-    const data = await response.json()
-  }
-
+  
+  const cartItems = async (username : string | undefined): Promise<any> => {
+    try {
+      const response = await fetch(`http://localhost:3000/cart/cartCheck/${username}`, {
+        method: "GET",
+      });
+      return response.json();
+    } catch (error) {
+      console.error("Error in cartItems:", error);
+      throw error; // Rethrow the error to handle it in your component
+    }
+  };
+  
   useEffect(() => {
-    check();
+    const fetchHandler = async () => {
+      try {
+        const checkProfile = await check();
+        // console.log('checkProfile:', checkProfile);
+        // console.log('final?.userName:', checkProfile.username);
+        //* The below line causes error if we dont pass the variable as argument and try to use the final.username 
+        const fetchUserCart = await cartItems(checkProfile.username);
+        final?.setCartDocumentId(fetchUserCart?._id)
+      } catch (error) {
+        console.error("Error in fetchHandler:", error);
+      }
+    };
+  
+    fetchHandler();
   }, []);
+  
+  
+
 
   return (
     <Fragment>
@@ -37,6 +64,7 @@ function Navbar() {
           </span>
         </div>
       </Link> */}
+      {/* <button onClick={cartItems}>Check</button> */}
       <div className="navbar">
         <Link to={`/`}>
         <span className="logo">EduLab</span>
@@ -48,7 +76,7 @@ function Navbar() {
         </svg>
         </span>
         }
-        {final?.userEmail && final.userEmail.length > 1 ? (
+        {final?.userName && final.userName.length > 1 ? (
           <div className ={` sign-out-row ${!toggle ? "hidden" : "white"}`} onClick={()=>setToggle(false)}>
             <Link to={`/`}>Home</Link>
             <Link to={`/instructor`}>Create</Link>

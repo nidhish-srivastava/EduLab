@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useCourseContext } from "../context/context";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { removeFromCartPromise } from "./Cart/Cart";
 
 
 const CourseHomePage = () => {
   const { courseId } = useParams();
+  const navigate = useNavigate()
   const final = useCourseContext();
   const [courseObject, setCourseObject] = useState<courseType>();
   const [check,setCheck] = useState(false)
@@ -18,41 +19,46 @@ const CourseHomePage = () => {
 
   const loggedInUserCartCheckPromise = async (): Promise<boolean> => {
     const response = await fetch(
-      `http://localhost:3000/cart/${courseId}/${JSON.parse(sessionStorage.getItem("userEmail") || "")}`
+      `http://localhost:3000/cart/${courseId}/${final?.userName}`
     );
     return response.json();
   };
 
   
-  const addToCart = async (): Promise<any> => {
-    if(final?.userEmail.length == 0) {
+  const addToCart = async () => {
+    if(final?.userName.length == 0) {
       alert("Login to purchase")
       return
     }
     try {
-      const res = await fetch(`http://localhost:3000/cart/${courseId}`, {
+      const response = await fetch(`http://localhost:3000/cart/${courseId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
-        body: JSON.stringify({ username: final?.userEmail }),
+        body: JSON.stringify({ username: final?.userName }),
         method: "POST",
       });
-      console.log(res)
+      alert(await response.text());
+      setCheck(true)
     } catch (error) {
-      // alert("Login/SignUp to buy a course");
+      alert("An error occurred. Please try again.");
     }
   };
 
   const buy = () =>{
-    if(final?.userEmail.length == 0) {
+    if(final?.userName.length == 0) {
       alert("Login to purchase")
       return
     }
+    navigate('/checkout')
   }
 
   const removeFromCart = async(courseId : number | undefined) =>{
-    const response = await removeFromCartPromise(courseId,final?.userEmail,cartDocumentId)
+    const res = await removeFromCartPromise(courseId,final?.userName,final?.cartDocumentId || "")
+    const data = await res.text()
+    alert(data)
+    setCheck(false)
   }
   
   useEffect(() => {
@@ -89,7 +95,7 @@ const CourseHomePage = () => {
       <div>
         <h2>&#8377;{courseObject?.price}</h2>
         {
-          final?.userEmail != courseObject?.author &&
+          final?.userName != courseObject?.author &&
           <div className="buy-btn-row">
             <button onClick={buy}>Buy Now</button>
             {!check ? 

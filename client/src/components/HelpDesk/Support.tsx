@@ -6,7 +6,7 @@ function Support() {
     const [problem,setProblem] = useState("")
     const final = useCourseContext()
     const sendProblemHandler = async() =>{
-     const username =  final?.userEmail
+     const username =  final?.userName
       await axios.post(`http://localhost:3000/support`,{
         problem,
         username

@@ -17,7 +17,7 @@ function MyCourses() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/admin/${final?.userEmail}`,
+        `http://localhost:3000/admin/${final?.userName}`,
         {
           method: "GET",
           headers: {
@@ -38,7 +38,7 @@ function MyCourses() {
   return (
     <>
       <h2 style={{ textAlign: "center", fontFamily: "Montserrat" }}>
-        Hello {final?.userEmail}
+        Hello {final?.userName}
       </h2>
         <Link to={`/instructor/create-course`}>
           <div style={{ padding: "2rem", textAlign: "center" }}>

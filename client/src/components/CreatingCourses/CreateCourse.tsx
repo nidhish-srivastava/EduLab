@@ -20,7 +20,7 @@ function CreateCourse() {
     title: "",
     description: "",
     price: "",
-    author: final?.userEmail,
+    author: final?.userName,
     imageLink: image,
   });
   // const [category, setCategory] = useState(0);
