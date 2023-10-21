@@ -36,17 +36,17 @@ export const purchase = async (req: Request, res: Response) => {
     (item) => item.course.toString() === courseId
   );
   if (courseInCart?.course.toString().length ?? 0 >1) {
-    res.json({ msg: "Course already inside cart" });
+    res.status(400).json({ msg: "Course already inside cart" });
     return; //* if we dont return then it will show error coz of the save method after the if else construct
   }
   cart.courses.push({ course: courseId }); // We push the course inside the array when the course is new
   }
   try {
     await cart.save()
-    res.send("Item added to cart")
+    res.json({msg : "Item added to cart"})
   } catch (error) {
       console.log(error);
-      res.status(500).json("Server error")
+      res.status(500).json({msg : "Server error"})
   }
 }
    catch (error) {

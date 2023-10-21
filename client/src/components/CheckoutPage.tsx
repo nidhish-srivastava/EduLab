@@ -2,6 +2,7 @@ import  { useState } from "react";
 import './Checkout.css'
 import qrcode from './qr-code.png'
 import { useCourseContext } from "../context/context";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const PaymentOption = () => {
@@ -11,11 +12,11 @@ const PaymentOption = () => {
   const renderPaymentForm = () => {
     if (paymentMethod === "card-number") {
       return (
-        <div id="card-number-form" className="render-payment-form">
+        <form id="card-number-form" className="render-payment-form">
           <input type="text" required={true} name="card-number" placeholder="Card number" />
           <input type="text" required={true} name="expiration-date" placeholder="MM/YY" />
           <input type="text" required={true} name="cvc" placeholder="CVC" />
-        </div>
+        </form>
       );
     } else if (paymentMethod === "qr-code") {
       return (
@@ -23,9 +24,10 @@ const PaymentOption = () => {
           <img src={qrcode} alt="QR code" />
         </div>
       );
-    } else {
-      return <h3>asdasdasdasd</h3>;
-    }
+    } 
+    // else {
+      // return <h3></h3>;
+    // }
   };
 
   const addToBoughtCourses = async()=>{
@@ -42,13 +44,14 @@ const PaymentOption = () => {
     })
     const data = await response.json()
     if(response.status==201){
-      alert(data.message)
+      toast.success(data.message)
       window.location.href = '/'
     }
   }
 
   return (
     <>
+    <Toaster/>
     <div>
       <div className="bill-item">
       <label htmlFor="">{JSON.parse(sessionStorage.getItem("bill") || "").title}</label>
@@ -59,7 +62,7 @@ const PaymentOption = () => {
         </button>
       </div>
     </div>
-    <form className="payment-option">
+    <div className="payment-option">
       <label  htmlFor="payment-method">Select payment method</label>
       <select  name="payment-method" id="payment-method" onChange={e=>setPaymentMethod(e.target.value)}>
         <option value="card-number">Card number</option>
@@ -67,9 +70,9 @@ const PaymentOption = () => {
       </select>
       {renderPaymentForm()}
       <div className="center">
-      <button className="bill" style={{marginTop : "1rem"}} onClick={addToBoughtCourses}>Make payment</button>
+      <button  className="bill" style={{marginTop : "1rem"}} onClick={addToBoughtCourses}>Make payment</button>
       </div>
-    </form>
+    </div>
     </>
   );
 };

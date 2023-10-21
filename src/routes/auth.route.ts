@@ -9,5 +9,5 @@ router.post('/login',login)
 router.post('/signup',signup)
 router.post('/buy-course',buyCourse)
 router.get('/fetchBoughtCourses/:username',fetchBoughtCourses)
-router.post('/checkIfBought',checkIfCourseBought)
+router.get('/checkIfBought/:username/:courseId',checkIfCourseBought)
 export default router

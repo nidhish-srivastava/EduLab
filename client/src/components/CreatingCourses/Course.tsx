@@ -46,7 +46,7 @@ function Course() {
           <div className="edit-btn-row">
             <button onClick={deleteHandler}>Delete</button>
             <button
-              // onClick={() => navigate(`/instructor/update-course/${courseId}`)}
+              onClick={() => navigate(`/instructor/update-course/${courseId}`)}
             >
               Update
             </button>

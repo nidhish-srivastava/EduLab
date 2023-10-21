@@ -1,5 +1,2 @@
-Create the UpdateCourse functionality
-
-react toast
 Create api for exploring courses of a specific creator
 If somone is a creator,then create api for profile creation

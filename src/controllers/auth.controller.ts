@@ -1,9 +1,8 @@
 import { Auth } from "../mongodb/model";
-import express,{ NextFunction, Request, Response,Router } from "express";
+import express,{  Request, Response,Router } from "express";
 import bcrypt, { hashSync } from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
-import { log } from "console";
 dotenv.config()
 
 
@@ -52,6 +51,8 @@ export const login =async(req:Request,res : Response)=>{
     }
 }
 
+
+
 export const buyCourse = async(req:Request,res:Response)=>{
     const {courseId,username} = req.body
 
@@ -70,9 +71,9 @@ export const buyCourse = async(req:Request,res:Response)=>{
             return res.status(404).json({ message: 'User not found' });
           }
 
-          if(updatedUser.boughtCourses.includes(courseId)){
-            return res.status(400).json({message : "Course already bought"})
-          }
+        //   if(updatedUser.boughtCourses.includes(courseId)){
+        //     return res.status(400).json({message : "Course already bought"})
+        //   }
       
           res.status(201).json({ message: 'Course bought successfully' });
         } catch (error) {
@@ -96,13 +97,13 @@ export const fetchBoughtCourses = async(req:Request,res:Response)=>{
 }
 
 export const checkIfCourseBought = async(req:Request,res:Response)=>{
-    const {username,courseId} = req.body
+    const {username,courseId} = req.params
     try {
     const findUser = await Auth.findOne({username : username})
     if(findUser?.boughtCourses.includes(courseId)){
-       return res.status(400).json({message : "Course already bought"})
+       return res.status(400).json({message : true})
     }
-    else res.status(200).json({message : "Proceed"})
+    else res.status(200).json({message : false})
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }

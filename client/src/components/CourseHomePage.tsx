@@ -3,19 +3,22 @@ import { useCourseContext } from "../context/context";
 import { useNavigate, useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { removeFromCartPromise } from "./Cart/Cart";
+import toast, { Toaster } from "react-hot-toast";
 
-export const fetchCoursePromise = async (courseId : string | undefined): Promise<courseType> => {
+export const fetchCoursePromise = async (
+  courseId: string | undefined
+): Promise<courseType> => {
   const response = await fetch(`http://localhost:3000/user/${courseId}`);
-  return response.json()
+  return response.json();
 };
 
 const CourseHomePage = () => {
   const { courseId } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const final = useCourseContext();
   const [courseObject, setCourseObject] = useState<courseType>();
-  const [check,setCheck] = useState(false)
-
+  const [check, setCheck] = useState(false);
+  const [checkBought, setCheckBought] = useState(false);
 
   const loggedInUserCartCheckPromise = async (): Promise<boolean> => {
     const response = await fetch(
@@ -24,11 +27,10 @@ const CourseHomePage = () => {
     return response.json();
   };
 
-  
   const addToCart = async () => {
-    if(final?.userName.length == 0) {
-      alert("Login to purchase")
-      return
+    if (final?.userName.length == 0) {
+      toast.error("Login to purchase");
+      return;
     }
     try {
       const response = await fetch(`http://localhost:3000/cart/${courseId}`, {
@@ -39,60 +41,64 @@ const CourseHomePage = () => {
         body: JSON.stringify({ username: final?.userName }),
         method: "POST",
       });
-      alert(await response.text());
-      setCheck(true)
+      const data = await response.json();
+      if (response.status == 400) {
+        toast.error(data.msg);
+      }
+      if (response.status == 200) {
+        toast.success(data.msg);
+      }
+      setCheck(true);
     } catch (error) {
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
   };
 
-  const buy = async(courseObject :courseType | undefined ) =>{
-    if(final?.userName.length == 0) {
-      alert("Login to purchase")
-      return
-    }
-    const response = await fetch(`http://localhost:3000/auth/checkIfBought`,{
-      headers : {
-        "Content-Type" : "application/json",
-      },
-      method : "POST",
-      body : JSON.stringify({
-        username : final?.userName,
-        courseId : courseObject?._id
-      })
-    })
-    const data = await response.json()
-    if(response.status==400){
-      alert(data.message)
-      return
-    }
-    if(response.status==200){
-      sessionStorage.setItem("bill",JSON.stringify(courseObject))
-      navigate('/checkout')
-    }
-  }
+  const checkIfBought = async (username: string | undefined) => {
+    const response = await fetch(
+      `http://localhost:3000/auth/checkIfBought/${username}/${courseId}`
+    );
+    return response.json();
+  };
 
-  const removeFromCart = async(courseId : number | undefined) =>{
-    const res = await removeFromCartPromise(courseId,final?.userName,final?.cartDocumentId || "")
-    const data = await res.text()
-    alert(data)
-    setCheck(false)
-  }
-  
+  const buy = async (courseObject: courseType | undefined) => {
+    if (final?.userName.length == 0) {
+      toast.error("Login to purchase");
+      return;
+    }
+    const checkIfBoughtResult = await checkIfBought(final?.userName);
+    if(checkIfBoughtResult.message==true) {
+      setCheckBought(true)
+      return toast.error("Course already bought")
+    }
+    sessionStorage.setItem("bill", JSON.stringify(courseObject));
+    navigate("/checkout");
+  };
+
+  const removeFromCart = async (courseId: number | undefined) => {
+    const res = await removeFromCartPromise(
+      courseId,
+      final?.userName,
+      final?.cartDocumentId || ""
+    );
+    const data = await res.text();
+    toast.success(data);
+    setCheck(false);
+  };
+
   useEffect(() => {
     const fetchCartItemsHandler = async () => {
       try {
         const fetchCourseResult = await fetchCoursePromise(courseId);
         setCourseObject(fetchCourseResult);
-  
-        // Introduce a delay using setTimeout
-        const timerId = setTimeout(async () => {
-          const loggedInUserCartCheckResult = await loggedInUserCartCheckPromise();
-          setCheck(loggedInUserCartCheckResult)
-        }, 10); // Adjust the delay time (in milliseconds) as needed
-        return ()=> clearTimeout(timerId)
+
+        const loggedInUserCartCheckResult =
+          await loggedInUserCartCheckPromise();
+        setCheck(loggedInUserCartCheckResult);
+        
+        const checkIfBoughtResult = await checkIfBought(final?.userName);
+        setCheckBought(checkIfBoughtResult.message);
       } catch (error) {
-        // Handle any errors that may occur during the fetch
         console.error(error);
       }
     };
@@ -102,32 +108,41 @@ const CourseHomePage = () => {
 
   return (
     <div className="individual-course-card-home-page">
-    <div className="image-wrapper">
-      <img src={courseObject?.imageLink} alt="" loading="lazy" />
-    </div>
-    <div className="right-side">
-      <div>
-        <h1>{courseObject?.title}</h1>
-        <p>{courseObject?.description}</p>
+      <Toaster />
+      <div className="image-wrapper">
+        <img src={courseObject?.imageLink} alt="" loading="lazy" />
       </div>
-      <div>
-        <h2>&#8377;{courseObject?.price}</h2>
-        {
-          final?.userName != courseObject?.author &&
-          <div className="buy-btn-row">
-            <button onClick={()=>buy(courseObject)}>Buy Now</button>
-            {!check ? 
-            <button onClick={addToCart}>
-            Add to cart
-            </button>
-            : <button onClick={()=>removeFromCart(courseObject?._id)}>Remove from Cart</button>
-          }
-          </div>
-          }
-      </div>
-    </div>
-  </div>
-  )
+      <div className="right-side">
+        <div>
+          <h1>{courseObject?.title}</h1>
+          <p>{courseObject?.description}</p>
+        </div>
+        <div>
+          <h2>&#8377;{courseObject?.price}</h2>
+          {final?.userName != courseObject?.author && (
+            <div className="buy-btn-row">
+              {
+                checkBought ? 
+              <button>Course purchased</button>
+              :
+              <>
+              <button onClick={() => buy(courseObject)}>Buy Now</button>
+              {!check ? (
+                <button onClick={addToCart}>Add to cart</button>
+                ) : (
+                  <button onClick={() => removeFromCart(courseObject?._id)}>
+                  Remove from Cart
+                  </button>
+                  )}
+                  </>
 }
+            </div>
+          ) 
+          }
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default CourseHomePage
+export default CourseHomePage;
