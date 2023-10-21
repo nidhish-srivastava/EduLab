@@ -98,7 +98,7 @@ function Navbar() {
               </Link>
             </span> */}
             {/* <button>Cart{" (0) "}</button> */}
-            <a href={`/cart`}>
+            <a href={`${baseUrl}/cart`}>
               <span className="cart-icon">
               <i className="fa-solid fa-cart-shopping"></i>
               </span>
