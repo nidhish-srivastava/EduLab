@@ -28,6 +28,7 @@ function Cart() {
      },0)
 
      const fetchCartItems = async():Promise<any> =>{
+      console.log(final);
       const response = await fetch(`${baseUrl}/cart/${final?.userName}`)
       return response.json()
      }

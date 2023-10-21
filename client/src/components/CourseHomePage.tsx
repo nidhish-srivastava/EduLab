@@ -47,6 +47,7 @@ const CourseHomePage = () => {
         toast.error(data.msg);
       }
       if (response.status == 200) {
+        
         toast.success(data.msg);
       }
       setCheck(true);
