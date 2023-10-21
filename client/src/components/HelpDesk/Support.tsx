@@ -7,7 +7,7 @@ function Support() {
     const final = useCourseContext()
     const sendProblemHandler = async() =>{
      const username =  final?.userName
-      await axios.post(`http://localhost:3000/support`,{
+      await axios.post(`${baseUrl}/support`,{
         problem,
         username
       })

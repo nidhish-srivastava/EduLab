@@ -3,7 +3,7 @@ import './Checkout.css'
 import qrcode from './qr-code.png'
 import { useCourseContext } from "../context/context";
 import toast, { Toaster } from "react-hot-toast";
-
+import { baseUrl } from "../utils";
 
 const PaymentOption = () => {
   const [paymentMethod, setPaymentMethod] = useState("card-number");
@@ -31,7 +31,7 @@ const PaymentOption = () => {
   };
 
   const addToBoughtCourses = async()=>{
-    const response = await fetch(`http://localhost:3000/auth/buy-course`,{
+    const response = await fetch(`${baseUrl}/auth/buy-course`,{
       method : "POST",
       headers : {
         "Content-Type" : "application/json"

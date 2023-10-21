@@ -2,6 +2,7 @@ import { useEffect,useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { courseType } from "./MyCourses";
 import { fetchCoursePromise } from "../CourseHomePage";
+import { baseUrl } from "../../utils";
 
 function Course() {
   const { courseId } = useParams();
@@ -15,7 +16,7 @@ function Course() {
 
   const deleteHandler = async () => {
     await fetch(
-      `http://localhost:3000/admin/${courseId}`,
+      `${baseUrl}/admin/${courseId}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

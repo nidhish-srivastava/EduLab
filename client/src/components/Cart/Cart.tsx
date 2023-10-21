@@ -2,9 +2,10 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import { useCourseContext } from "../../context/context"
 import { courseType } from "../CreatingCourses/MyCourses"
+import { baseUrl } from '../../utils'
 
 export const removeFromCartPromise = async(courseId : number | undefined,username : string | undefined,cartDocumentId : string) =>{
-  return await fetch(`http://localhost:3000/cart/${courseId}`,{
+  return await fetch(`${baseUrl}/cart/${courseId}`,{
     body : JSON.stringify({
       username : username,
       cartDocumentId : cartDocumentId
@@ -27,7 +28,7 @@ function Cart() {
      },0)
 
      const fetchCartItems = async():Promise<any> =>{
-      const response = await fetch(`http://localhost:3000/cart/${final?.userName}`)
+      const response = await fetch(`${baseUrl}/cart/${final?.userName}`)
       return response.json()
      }
      

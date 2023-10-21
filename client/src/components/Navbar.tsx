@@ -2,13 +2,14 @@ import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCourseContext } from "../context/context";
 import a from "../blank.jpg";
+import { baseUrl } from "../utils";
 
 function Navbar() {
   const final = useCourseContext();
   const [toggle,setToggle] = useState(false)
   const check = async (): Promise<any> => {
     try {
-      const response = await fetch(`http://localhost:3000/auth/me`, {
+      const response = await fetch(`${baseUrl}/auth/me`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -25,7 +26,7 @@ function Navbar() {
   
   const cartItems = async (username : string | undefined): Promise<any> => {
     try {
-      const response = await fetch(`http://localhost:3000/cart/cartCheck/${username}`, {
+      const response = await fetch(`${baseUrl}/cart/cartCheck/${username}`, {
         method: "GET",
       });
       return response.json();

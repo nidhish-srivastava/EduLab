@@ -3,6 +3,7 @@ import a from '../blank.jpg'
 import { useCourseContext } from '../context/context'
 import CourseResultCard from './CourseResultCard'
 import { courseType } from './CreatingCourses/MyCourses'
+import { baseUrl } from "../utils";
 
 function Profile() {
     const final = useCourseContext()
@@ -10,7 +11,7 @@ function Profile() {
 
     const boughtCourses = async()=>{
       try {
-        const response = await fetch(`http://localhost:3000/auth/fetchBoughtCourses/${final?.userName}`)
+        const response = await fetch(`${baseUrl}/auth/fetchBoughtCourses/${final?.userName}`)
         const data = await response.json()
         setData(data)
       } catch (error) {

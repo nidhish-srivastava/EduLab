@@ -4,11 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { removeFromCartPromise } from "./Cart/Cart";
 import toast, { Toaster } from "react-hot-toast";
+import { baseUrl } from "../utils";
 
 export const fetchCoursePromise = async (
   courseId: string | undefined
 ): Promise<courseType> => {
-  const response = await fetch(`http://localhost:3000/user/${courseId}`);
+  const response = await fetch(`${baseUrl}/user/${courseId}`);
   return response.json();
 };
 
@@ -22,7 +23,7 @@ const CourseHomePage = () => {
 
   const loggedInUserCartCheckPromise = async (): Promise<boolean> => {
     const response = await fetch(
-      `http://localhost:3000/cart/${courseId}/${final?.userName}`
+      `${baseUrl}/cart/${courseId}/${final?.userName}`
     );
     return response.json();
   };
@@ -33,7 +34,7 @@ const CourseHomePage = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:3000/cart/${courseId}`, {
+      const response = await fetch(`${baseUrl}/cart/${courseId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -56,7 +57,7 @@ const CourseHomePage = () => {
 
   const checkIfBought = async (username: string | undefined) => {
     const response = await fetch(
-      `http://localhost:3000/auth/checkIfBought/${username}/${courseId}`
+      `${baseUrl}/auth/checkIfBought/${username}/${courseId}`
     );
     return response.json();
   };

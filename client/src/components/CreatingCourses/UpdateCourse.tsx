@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { courseType } from "./MyCourses"
 import { fetchCoursePromise } from "../CourseHomePage"
+import { baseUrl } from "../../utils";
 
 
 function UpdateCourse() {
@@ -21,7 +22,7 @@ function UpdateCourse() {
     }
     const updatehandler = async() =>{
       try {
-        const response = await fetch(`http://localhost:3000/admin/${courseId}`,{
+        const response = await fetch(`${baseUrl}/admin/${courseId}`,{
            headers: {
              Authorization: "Bearer " + localStorage.getItem("token"),
              "Content-Type" : "application/json"

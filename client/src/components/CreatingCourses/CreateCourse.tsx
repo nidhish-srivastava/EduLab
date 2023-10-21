@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { courseType } from "./MyCourses";
 import Compress from "react-image-file-resizer";
 import { base64 } from "../../base64";
+import { baseUrl } from "../../utils";
 
 // type categoriesArrayType = {
 //   category: string;
@@ -74,7 +75,7 @@ function CreateCourse() {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:3000/admin`, {
+    const res = await fetch(`${baseUrl}/admin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

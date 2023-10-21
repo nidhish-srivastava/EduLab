@@ -30,7 +30,7 @@ function BusinessForm({ setShow }: BusinessFormProps) {
       companySize,
     };
     const response = await axios.post(
-      `http://localhost:3000/business`,
+      `${baseUrl}/business`,
       formData
     );
     console.log(response.data);

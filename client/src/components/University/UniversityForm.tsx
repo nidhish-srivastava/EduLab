@@ -30,7 +30,7 @@ function UniversityForm({setShow} : UniversityFormProps ) {
       department
     };
     const response = await axios.post(
-      `http://localhost:3000/university`,
+      `${baseUrl}/university`,
       formData
     );
     console.log(response.data);

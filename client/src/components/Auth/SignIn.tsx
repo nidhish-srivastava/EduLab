@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { baseUrl } from "../../utils";
 
 function SignIn() {
   const [username, setUsername] = useState("");
@@ -8,7 +9,7 @@ function SignIn() {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3000/auth/login`, {
+      const response = await fetch(`${baseUrl}/auth/login`, {
         body: JSON.stringify({
           username: username,
           password: password,

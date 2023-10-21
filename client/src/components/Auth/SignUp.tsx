@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { baseUrl } from "../../utils"
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ function SignUp() {
   const submitHandler = async (e: any) => {
     e.preventDefault();
     if (confirmPassword == password) {
-      const response = await fetch(`http://localhost:3000/auth/signup`, {
+      const response = await fetch(`${baseUrl}/auth/signup`, {
         body: JSON.stringify({
           username: username,
           password: password,

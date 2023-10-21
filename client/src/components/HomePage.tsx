@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { courseType } from "./CreatingCourses/MyCourses";
 import CourseResultCard from "./CourseResultCard";
 import { useSearchParams } from "react-router-dom";
+import { baseUrl } from "../utils";
+
 
 function Home() {
   const [data, setData] = useState<courseType[]>([]);
@@ -11,7 +13,7 @@ function Home() {
   const fetchPosts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/user?title=${searchTerm}`
+        `${baseUrl}/user?title=${searchTerm}`
       );
       const data = await response.json();
       setData(data);

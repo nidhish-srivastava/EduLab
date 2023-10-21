@@ -1,3 +1,5 @@
+export const baseUrl = `https://edu-lab-xi.vercel.app`
+
 export const JobTitleUniversity = [
   "President",
   "Chancellor",

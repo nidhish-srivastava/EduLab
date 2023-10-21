@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCourseContext } from "../../context/context";
 import CourseResultCard from "../CourseResultCard";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../utils";
 
 export type   courseType = {
   title: string;
@@ -18,7 +19,7 @@ function MyCourses() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/admin/${final?.userName}`,
+        `${baseUrl}/admin/${final?.userName}`,
         {
           method: "GET",
           headers: {
