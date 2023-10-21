@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
 import { useCourseContext } from "../context/context";
 import a from "../blank.jpg";
 import { baseUrl } from "../utils";
 
 function Navbar() {
   const final = useCourseContext();
+  const navigate = useNavigate()
   const [toggle,setToggle] = useState(false)
   const check = async (): Promise<any> => {
     try {
@@ -35,6 +36,12 @@ function Navbar() {
       throw error; // Rethrow the error to handle it in your component
     }
   };
+
+  const cartNavigate = () =>{
+    // window.location.pathname = "/cart"
+    navigate('/cart')
+    window.location.reload()
+  }
   
   useEffect(() => {
     const fetchHandler = async () => {
@@ -98,11 +105,11 @@ function Navbar() {
               </Link>
             </span> */}
             {/* <button>Cart{" (0) "}</button> */}
-            <a href={`https://edu-lab-dun.vercel.app/cart`}>
+            <span onClick={cartNavigate}>
               <span className="cart-icon">
               <i className="fa-solid fa-cart-shopping"></i>
               </span>
-            </a>
+            </span>
 
             <button
               className="logout-btn"

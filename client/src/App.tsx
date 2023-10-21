@@ -27,7 +27,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />
           <Route path="/:courseId" element = {<CourseHomePage/>} />
-          <Route path="https://edu-lab-dun.vercel.app/cart" element = {<Cart/>} />
+          <Route path="/cart" element = {<Cart/>} />
           <Route path="/checkout" element = {<CheckoutPage/>} />
           <Route path="/edulab-business" element={<Business />} />
           <Route path="/edulab-university" element = {<University/>} />
