@@ -4,6 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { courseType } from "./CreatingCourses/MyCourses";
 import { removeFromCartPromise } from "./Cart/Cart";
 
+export const fetchCoursePromise = async (courseId : string | undefined): Promise<courseType> => {
+  const response = await fetch(`http://localhost:3000/user/${courseId}`);
+  return response.json()
+};
 
 const CourseHomePage = () => {
   const { courseId } = useParams();
@@ -12,10 +16,6 @@ const CourseHomePage = () => {
   const [courseObject, setCourseObject] = useState<courseType>();
   const [check,setCheck] = useState(false)
 
-  const fetchCoursePromise = async (): Promise<courseType> => {
-    const response = await fetch(`http://localhost:3000/user/${courseId}`);
-    return response.json()
-  };
 
   const loggedInUserCartCheckPromise = async (): Promise<boolean> => {
     const response = await fetch(
@@ -46,13 +46,30 @@ const CourseHomePage = () => {
     }
   };
 
-  const buy = (price : number | undefined | string,name : string | undefined) =>{
+  const buy = async(courseObject :courseType | undefined ) =>{
     if(final?.userName.length == 0) {
       alert("Login to purchase")
       return
     }
-    sessionStorage.setItem("bill",JSON.stringify({price : price,name : name}))
-    navigate('/checkout')
+    const response = await fetch(`http://localhost:3000/auth/checkIfBought`,{
+      headers : {
+        "Content-Type" : "application/json",
+      },
+      method : "POST",
+      body : JSON.stringify({
+        username : final?.userName,
+        courseId : courseObject?._id
+      })
+    })
+    const data = await response.json()
+    if(response.status==400){
+      alert(data.message)
+      return
+    }
+    if(response.status==200){
+      sessionStorage.setItem("bill",JSON.stringify(courseObject))
+      navigate('/checkout')
+    }
   }
 
   const removeFromCart = async(courseId : number | undefined) =>{
@@ -65,7 +82,7 @@ const CourseHomePage = () => {
   useEffect(() => {
     const fetchCartItemsHandler = async () => {
       try {
-        const fetchCourseResult = await fetchCoursePromise();
+        const fetchCourseResult = await fetchCoursePromise(courseId);
         setCourseObject(fetchCourseResult);
   
         // Introduce a delay using setTimeout
@@ -98,7 +115,7 @@ const CourseHomePage = () => {
         {
           final?.userName != courseObject?.author &&
           <div className="buy-btn-row">
-            <button onClick={()=>buy(courseObject?.price,courseObject?.title)}>Buy Now</button>
+            <button onClick={()=>buy(courseObject)}>Buy Now</button>
             {!check ? 
             <button onClick={addToCart}>
             Add to cart

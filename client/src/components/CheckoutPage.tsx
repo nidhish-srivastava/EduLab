@@ -1,18 +1,20 @@
 import  { useState } from "react";
 import './Checkout.css'
 import qrcode from './qr-code.png'
+import { useCourseContext } from "../context/context";
+
 
 const PaymentOption = () => {
   const [paymentMethod, setPaymentMethod] = useState("card-number");
-
+  const final = useCourseContext()
 
   const renderPaymentForm = () => {
     if (paymentMethod === "card-number") {
       return (
         <div id="card-number-form" className="render-payment-form">
-          <input type="text" name="card-number" placeholder="Card number" />
-          <input type="text" name="expiration-date" placeholder="MM/YY" />
-          <input type="text" name="cvc" placeholder="CVC" />
+          <input type="text" required={true} name="card-number" placeholder="Card number" />
+          <input type="text" required={true} name="expiration-date" placeholder="MM/YY" />
+          <input type="text" required={true} name="cvc" placeholder="CVC" />
         </div>
       );
     } else if (paymentMethod === "qr-code") {
@@ -26,20 +28,38 @@ const PaymentOption = () => {
     }
   };
 
+  const addToBoughtCourses = async()=>{
+    const response = await fetch(`http://localhost:3000/auth/buy-course`,{
+      method : "POST",
+      headers : {
+        "Content-Type" : "application/json"
+      },
+      body : JSON.stringify({
+        username : final?.userName,
+        courseId :  JSON.parse(sessionStorage.getItem("bill") || "")._id
+      })
+     
+    })
+    const data = await response.json()
+    if(response.status==201){
+      alert(data.message)
+      window.location.href = '/'
+    }
+  }
+
   return (
     <>
     <div>
       <div className="bill-item">
-      <label htmlFor="">{JSON.parse(sessionStorage.getItem("bill") || "").name}</label>
+      <label htmlFor="">{JSON.parse(sessionStorage.getItem("bill") || "").title}</label>
       <button className="bill">
-        Bill 
-        <span>
+        Bill &nbsp; <span>
         &#8377;{JSON.parse(sessionStorage.getItem("bill") || "").price}
         </span>
         </button>
       </div>
     </div>
-    <div className="payment-option">
+    <form className="payment-option">
       <label  htmlFor="payment-method">Select payment method</label>
       <select  name="payment-method" id="payment-method" onChange={e=>setPaymentMethod(e.target.value)}>
         <option value="card-number">Card number</option>
@@ -47,9 +67,9 @@ const PaymentOption = () => {
       </select>
       {renderPaymentForm()}
       <div className="center">
-      <button className="bill" style={{marginTop : "1rem"}}>Make payment</button>
+      <button className="bill" style={{marginTop : "1rem"}} onClick={addToBoughtCourses}>Make payment</button>
       </div>
-    </div>
+    </form>
     </>
   );
 };

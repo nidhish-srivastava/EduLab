@@ -70,10 +70,3 @@ export const findAuthorsCourses = async (req: Request, res: Response) => {
   res.status(200).json(find)
 };
 
-export const getCourse = async (req: Request, res: Response) => {
-  const { courseId } = req.params;
-  // console.log(courseId);
-  const find = await Course.findById({_id : courseId});
-  // console.log(find);
-  res.status(200).json(find);
-};

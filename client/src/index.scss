@@ -516,17 +516,23 @@ img {
 }
 
 .profile-page-container {
-  margin-top: 2rem;
   display: flex;
-  align-items: center;
   flex-direction: column;
 }
 
+.courses-you-bought-label{
+  text-align: center;
+  margin-top: 2rem;
+}
+
+
+
 .profile-image-wrapper {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
+  margin:  auto;
 }
 
 .profile-image-wrapper img {
@@ -625,12 +631,18 @@ img {
   .search-bar {
     width: 40%;
   }
+
+  .courses-you-bought-label{
+    text-align: left;
+    padding: 1rem 0 0 3rem;
+  }
+  
   .courses-container,.my-courses-container{
   display: grid;
-  grid-template-columns: repeat(3, 35%); /* Adjust as needed */
+  // grid-template-columns: repeat(3, 35%); /* Adjust as needed */
   grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
   gap: 10px; /* Adjust the gap between grid items */
-  place-items : center;
+  place-items : start;
   }
 }
 

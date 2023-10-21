@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { courseType } from "./MyCourses";
+import { fetchCoursePromise } from "../CourseHomePage";
 
 function Course() {
   const { courseId } = useParams();
@@ -8,9 +9,7 @@ function Course() {
   const navigate = useNavigate();
 
   const fetchCourse = async () => {
-    const response = await fetch(`http://localhost:3000/admin/course/${courseId}`)
-    const data = await response.json()
-    // console.log(data);
+    const data = await fetchCoursePromise(courseId)
     setCourse(data)
   };
 

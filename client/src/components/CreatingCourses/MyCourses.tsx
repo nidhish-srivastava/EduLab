@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCourseContext } from "../../context/context";
 import CourseResultCard from "../CourseResultCard";
 import { Link } from "react-router-dom";
+
 export type courseType = {
   title: string;
   imageLink : string;

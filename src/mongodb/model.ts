@@ -1,8 +1,18 @@
-import { Schema, model, Types } from "mongoose";
+import mongoose, { Schema, model, Types } from "mongoose";
+
+type courseType = {
+  title: string;
+  imageLink : string;
+  description: string;
+  price : number | string
+  _id?: number;
+  author?: string;
+};
 
 interface iAuth {
   username: string;
   password: string;
+  boughtCourses : string[]
 }
 
 interface iCourse {
@@ -51,6 +61,9 @@ interface iSupport {
 const authSchema = new Schema<iAuth>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  // boughtCourses : {type : [Object],ref : "Course"}
+  boughtCourses : [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
+  // {type : Schema.Types.ObjectId,ref : "Course",default : []}
 });
 
 const courseSchema = new Schema<iCourse>({
@@ -74,11 +87,11 @@ const cartSchema = new Schema<iCart>({
   ],
 });
 
-const businessRegisterSchema = new Schema<iBusinessRegister>({});
+// const businessRegisterSchema = new Schema<iBusinessRegister>({});
 
-const supportSchema = new Schema<iSupport>({});
+// const supportSchema = new Schema<iSupport>({});
 
-const universityRegisterSchema = new Schema<iUniversityRegister>({});
+// const universityRegisterSchema = new Schema<iUniversityRegister>({});
 
 const Auth = model<iAuth>("Auth", authSchema);
 const Course = model<iCourse>("Course", courseSchema);

@@ -1,9 +1,5 @@
-Update the course functionality
+Create the UpdateCourse functionality
 
 react toast
-
-Checkout page when we click on buy or click on proceeed to checkout page
-We need to add payment method css
-
-Now when someone buys a course,then create api for courses bought by the user
-Also create its front end when we click on my profile,there we can check our bought courses
+Create api for exploring courses of a specific creator
+If somone is a creator,then create api for profile creation
