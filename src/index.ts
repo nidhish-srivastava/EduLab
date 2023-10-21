@@ -11,7 +11,7 @@ import { connectmongodb } from "./mongodb/connect";
 import { v2 as cloudinary } from "cloudinary";
 const port = process.env.PORT || 4000
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "https://edu-lab-ruddy.vercel.app",
   // origin: "http://localhost:5173",
   credentials: true,
   //access-control-allow-credentials:true
