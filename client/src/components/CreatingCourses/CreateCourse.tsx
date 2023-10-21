@@ -115,9 +115,10 @@ function CreateCourse() {
         onChange={handleChange}
         value={formData.price}
       />
-
-      <div onClick={handleImage} className="image-wrapper-course-creation">
-        <img src={image} alt="Default image" loading="lazy" />
+{/* <label style={{fontSize : "1rem"}} htmlFor="cover-img">Choose Cover img</label> */}
+      <div onClick={handleImage}id="cover-img" className="image-wrapper-course-creation">
+        <label htmlFor="">Choose Cover img</label>
+        <img src={image}  alt="Default image" loading="lazy" />
       </div>
 
       {/* <div className="dropdown-row">

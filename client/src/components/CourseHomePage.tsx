@@ -46,11 +46,12 @@ const CourseHomePage = () => {
     }
   };
 
-  const buy = () =>{
+  const buy = (price : number | undefined | string,name : string | undefined) =>{
     if(final?.userName.length == 0) {
       alert("Login to purchase")
       return
     }
+    sessionStorage.setItem("bill",JSON.stringify({price : price,name : name}))
     navigate('/checkout')
   }
 
@@ -97,7 +98,7 @@ const CourseHomePage = () => {
         {
           final?.userName != courseObject?.author &&
           <div className="buy-btn-row">
-            <button onClick={buy}>Buy Now</button>
+            <button onClick={()=>buy(courseObject?.price,courseObject?.title)}>Buy Now</button>
             {!check ? 
             <button onClick={addToCart}>
             Add to cart

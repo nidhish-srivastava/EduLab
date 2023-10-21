@@ -1,0 +1,74 @@
+.payment-option {
+  width: 40%;
+  margin: 2rem auto;
+}
+
+.payment-option label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.payment-option select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+
+.render-payment-form{
+  margin-top: 2rem;
+}
+.render-payment-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.qr-code-wrapper{
+  width: 100%;
+  margin: 1rem auto;
+}
+
+.bill,.payment-make{
+  padding: 10px;
+  background-color: rgb(247, 19, 255);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.bill:hover {
+  background-color: #333;
+}
+
+.bill-item{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin: 1rem auto;
+  text-align: left;
+  width: 80%;
+}
+
+
+@media (min-width : 760px) {
+  .qr-code-wrapper{
+    width: 70%;
+  }
+  .bill-item{
+    width: 20%;
+    margin: 1rem;
+  }
+}
+
+@media (min-width : 1280px) {
+  .qr-code-wrapper{
+    width: 50%;
+  }
+  .bill-item{
+    width: 15%;
+  }
+}
+
