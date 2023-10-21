@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 import { JobTitle, CompanySize, countriesList } from "../../utils";
-
+// import { baseUrl } from "../../utils";
 type BusinessFormProps = {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -30,7 +30,7 @@ function BusinessForm({ setShow }: BusinessFormProps) {
       companySize,
     };
     const response = await axios.post(
-      `${baseUrl}/business`,
+      `http://localhost:3000/business`,
       formData
     );
     console.log(response.data);

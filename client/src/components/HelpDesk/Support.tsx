@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import a from './2.jpg'
+import { baseUrl } from '../../utils'
 import axios from 'axios'
 import { useCourseContext } from '../../context/context'
 function Support() {
