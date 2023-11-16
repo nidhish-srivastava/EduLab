@@ -24,7 +24,7 @@ function Cart() {
     const final = useCourseContext()
     
     const sum = cartItemsArray.reduce((acc,iti : courseType)=>{
-       return acc + Number(iti.price)
+       return acc + Number(iti?.price)
      },0)
 
      const fetchCartItems = async():Promise<any> =>{
@@ -65,9 +65,9 @@ function Cart() {
               <div>
               <h2>{e?.title}
               </h2>
-              <span style={{color : "green"}} >{e.author}</span>
+              <span style={{color : "green"}} >{e?.author}</span>
               </div>
-              <h3>&#8377;{e.price}</h3>
+              <h3>&#8377;{e?.price}</h3>
             </div>
             <span className="remove-course" onClick={()=>removeCartItem(e?._id)}>
               <i className="fa fa-trash" ></i>
