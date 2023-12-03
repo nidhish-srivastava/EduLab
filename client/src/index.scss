@@ -224,14 +224,13 @@ a {
   width: 80%;
   margin: 2rem auto;
   font-family: "Poppins", sans-serif;
-  gap: 2rem;
+  gap: 2rem; 
 }
 
 .course-card {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   width: 80%;
   align-items: start;
   margin: 0 auto;
