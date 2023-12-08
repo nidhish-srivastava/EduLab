@@ -8,13 +8,12 @@ import CreateCourse from "./components/CreatingCourses/CreateCourse";
 import UpdateCourse from "./components/CreatingCourses/UpdateCourse";
 import Home from "./components/HomePage";
 import Instructor from "./components/CreatingCourses/Instructor";
-import Business from "./components/Business/Business";
 import Support from "./components/HelpDesk/Support";
 import Profile from './components/Profile'
-import University from "./components/University/University";
 import Cart from "./components/Cart/Cart";
 import CourseHomePage from "./components/CourseHomePage";
 import CheckoutPage from "./components/CheckoutPage";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -22,15 +21,14 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/*" element = {<NotFound/>}/>
           <Route path="/my-profile" element = {<Profile/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />
-          <Route path="/:courseId" element = {<CourseHomePage/>} />
+          <Route path="/course/:courseName/:courseId" element = {<CourseHomePage/>} />
           <Route path="/cart" element = {<Cart/>} />
           <Route path="/checkout" element = {<CheckoutPage/>} />
-          <Route path="/edulab-business" element={<Business />} />
-          <Route path="/edulab-university" element = {<University/>} />
           <Route  path="/instructor" element={<Instructor />} />
           <Route path="/instructor/my-courses" element={<MyCourses />} />
           <Route path="/instructor/create-course" element={<CreateCourse />} />

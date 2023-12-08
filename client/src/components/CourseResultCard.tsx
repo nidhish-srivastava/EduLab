@@ -7,7 +7,7 @@ type CourseResultCardProp = {
 
 function CourseResultCard({ course }: CourseResultCardProp) {
   return (
-      <Link to={`${course._id}`}>
+      <Link to={`/course/${course.title}/${course._id}`}>
         <div className="course-card">
           <div className="api-image-wrapper">
             <img

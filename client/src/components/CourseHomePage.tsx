@@ -5,6 +5,8 @@ import { courseType } from "./CreatingCourses/MyCourses";
 import { removeFromCartPromise } from "./Cart/Cart";
 import toast, { Toaster } from "react-hot-toast";
 import { baseUrl } from "../utils";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export const fetchCoursePromise = async (
   courseId: string | undefined
@@ -19,6 +21,7 @@ const CourseHomePage = () => {
   const final = useCourseContext();
   const [courseObject, setCourseObject] = useState<courseType>();
   const [check, setCheck] = useState(false);
+  const [loading,setLoading] = useState(false)
   const [checkBought, setCheckBought] = useState(false);
 
   const loggedInUserCartCheckPromise = async (): Promise<boolean> => {
@@ -90,6 +93,7 @@ const CourseHomePage = () => {
 
   useEffect(() => {
     const fetchCartItemsHandler = async () => {
+      setLoading(true)
       try {
         const fetchCourseResult = await fetchCoursePromise(courseId);
         setCourseObject(fetchCourseResult);
@@ -100,15 +104,26 @@ const CourseHomePage = () => {
         
         const checkIfBoughtResult = await checkIfBought(final?.userName);
         setCheckBought(checkIfBoughtResult.message);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.error(error);
       }
     };
     fetchCartItemsHandler();
   }, []);
+
+
   //* Now we need to create api which checks wether item present inside cart or not
 
   return (
+    <>
+    {
+      loading ? 
+      <div style={{width : "80%",margin :"4rem auto"}}>
+        <Skeleton count={5}/> 
+        </div>
+        : 
     <div className="individual-course-card-home-page">
       <Toaster />
       <div className="image-wrapper">
@@ -144,6 +159,8 @@ const CourseHomePage = () => {
         </div>
       </div>
     </div>
+    }
+    </>
   );
 };
 

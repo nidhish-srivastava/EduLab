@@ -1,25 +1,33 @@
 import { useEffect, useState } from "react";
 import { courseType } from "./CreatingCourses/MyCourses";
-import CourseResultCard from "./CourseResultCard";
 import { useSearchParams } from "react-router-dom";
 import { baseUrl } from "../utils";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { lazy, Suspense } from 'react';
+const CourseResultLazy = lazy(()=>import ("./CourseResultCard"))
 
 
 function Home() {
   const [data, setData] = useState<courseType[]>([]);
   const [searchParam, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading,setLoading] =useState(false)
 
   const fetchPosts = async () => {
+    setLoading(true)
     try {
       const response = await fetch(
         `${baseUrl}/user?title=${searchTerm}`
       );
       const data = await response.json();
+      setLoading(false)
       setData(data);
       if (data.length == 0)
         setSearchParams({ searchUserParam: `${searchTerm} not found` });
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false)
+    }
   };
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,6 +38,8 @@ function Home() {
     }, 700);
     return () => clearInterval(timer);
   }, [searchTerm]);
+
+
 
   return (
     <>
@@ -43,11 +53,22 @@ function Home() {
         />
       </div>
       <h3 style={{textAlign : "center",marginTop:"1rem",fontFamily : "Montserrat,sans-serif"}}>{searchParam.get("searchUserParam")}</h3>
+      <div style={{width : "80%",margin : "0 auto"}}>
+        {
+          loading && <div style={{width : "80%",margin :"4rem auto"}}>
+            <Skeleton count={5}/>
+            </div>
+        }
+        </div>
       <div className="courses-container">
         {data?.map((course, i) => {
-          return <CourseResultCard course={course} key={i} />;
+          return(
+            <Suspense fallback = {<Skeleton/>}>
+              <CourseResultLazy course={course} key={i} />
+            </Suspense>
+          ) 
         })}
-      </div>
+      </div> 
     </>
   );
 }

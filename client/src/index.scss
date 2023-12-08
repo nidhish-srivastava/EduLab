@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   box-sizing: border-box;
   font-family: "Montserrat",sans-serif;
@@ -639,8 +640,9 @@ img {
   .courses-container,.my-courses-container{
   display: grid;
   // grid-template-columns: repeat(3, 35%); /* Adjust as needed */
-  grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
-  gap: 10px; /* Adjust the gap between grid items */
+  // grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem; /* Adjust the gap between grid items */
   place-items : start;
   }
 }
