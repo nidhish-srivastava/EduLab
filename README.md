@@ -1,7 +1,6 @@
-## EduLab - A course selling hub catering to all types of learners
+## EduLab - A course selling hub
 
-This platform is like marketplace.You can create courses as well as sell courses.Colleges and Businesses can also register with us to tailor folks inside their institutions with customised courses made for training them
-
+Edulab is a comprehensive online course marketplace that serves as a hub for both learners and educators. Whether you're passionate about acquiring new knowledge or eager to share your expertise, Edulab provides a seamless platform for buying and selling online courses.
 ## Technologies Used
 
   - [React js](https://react.dev/) , [react-hot-toast](https://react-hot-toast.com/) , [react-image-file-resizer](https://www.npmjs.com/package/react-image-file-resizer) , [react-router-dom](https://reactrouter.com/en/main) - Libraries
