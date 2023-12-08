@@ -11,6 +11,7 @@ export const cartCheck = async(req:Request,res:Response)=>{
   }
 }
 
+
 export const checkCourseInCart = async(req:Request,res:Response) =>{
   const {courseId,username} = req.params
   const response = await Cart.findOne({username : username})

@@ -18,6 +18,11 @@ export const removeFromCartPromise = async(courseId : number | undefined,usernam
   })
 }
 
+export const fetchCartItems = async(username : string | undefined):Promise<any> =>{
+ const response = await fetch(`${baseUrl}/cart/${username}`)
+ return response.json()
+}
+
 function Cart() {
     const [cartItemsArray,setCartItemsArray] = useState([])
     const [cartDocumentId,setCartDocumentId] = useState("")
@@ -27,11 +32,6 @@ function Cart() {
        return acc + Number(iti?.price)
      },0)
 
-     const fetchCartItems = async():Promise<any> =>{
-      console.log(final);
-      const response = await fetch(`${baseUrl}/cart/${final?.userName}`)
-      return response.json()
-     }
      
      const removeCartItem = async(courseId : number | undefined) =>{
        try {
@@ -46,8 +46,9 @@ function Cart() {
     
     useEffect(()=>{
       const fetchCartItemsHandler = async() =>{
-          const data = await fetchCartItems()
-          setCartItemsArray(data.cartItems)
+          const data = await fetchCartItems(final?.userName)
+          final?.setCartLength(data.cartItems.length)
+          setCartItemsArray(data?.cartItems)
           setCartDocumentId(data.cart._id)
       }
       fetchCartItemsHandler()
@@ -55,8 +56,11 @@ function Cart() {
     
   return (
     <main className="cart-items-container">
+      <h3>
+        Total Items  :   {final?.cartLength}
+      </h3>
       <h2 style={{fontFamily : "Montserrat,sans-serif"}}>Total Bill : &#8377;{sum} </h2>
-        {cartItemsArray.map((e : courseType)=>(
+        {cartItemsArray?.map((e : courseType)=>(
           <div className="cart-item-card">
             <div className="left">
               <img src={e?.imageLink} loading="lazy" alt="" />

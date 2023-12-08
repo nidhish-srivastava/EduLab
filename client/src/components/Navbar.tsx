@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useCourseContext } from "../context/context";
 import a from "../blank.jpg";
 import { baseUrl } from "../utils";
+import { fetchCartItems } from "./Cart/Cart";
 
 function Navbar() {
   const final = useCourseContext();
@@ -45,6 +46,12 @@ function Navbar() {
         //* The below line causes error if we dont pass the variable as argument and try to use the final.username 
         const fetchUserCart = await cartItems(checkProfile.username);
         final?.setCartDocumentId(fetchUserCart?._id)
+        try {
+          const fetchCartItemsLength = await fetchCartItems(final?.userName)
+          final?.setCartLength(fetchCartItemsLength.cartItems.length)
+        } catch (error) {
+          
+        }
       } catch (error) {
         console.error("Error in fetchHandler:", error);
       }
@@ -99,8 +106,11 @@ function Navbar() {
             </span> */}
             {/* <button>Cart{" (0) "}</button> */}
             <Link reloadDocument to={`/cart`}>
-              <span className="cart-icon">
+              <span className="cart-icon" style={{position : "relative"}}>
               <i className="fa-solid fa-cart-shopping"></i>
+              <span className="cartLength">
+                {final.cartLength}
+              </span>
               </span>
             </Link>
 

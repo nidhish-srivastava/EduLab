@@ -1,4 +1,6 @@
 export const baseUrl = `https://edu-lab-xi.vercel.app`
+// export const baseUrl = `http://localhost:4000`
+
 
 export const JobTitleUniversity = [
   "President",

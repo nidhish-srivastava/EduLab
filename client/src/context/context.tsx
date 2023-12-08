@@ -5,6 +5,8 @@ type CourseContextType = {
   setuserName: React.Dispatch<React.SetStateAction<string>>;
   cartDocumentId : string
   setCartDocumentId : React.Dispatch<React.SetStateAction<string>>
+  cartLength: number
+  setCartLength : React.Dispatch<React.SetStateAction<number>>
 };
 
 const CourseContext = createContext<CourseContextType | null>(null);
@@ -23,11 +25,14 @@ type CourseContextProvider = {
 export const CourseContextProvider = ({ children }: CourseContextProvider) => {
   const [userName, setuserName] = useState("");
   const [cartDocumentId,setCartDocumentId] = useState("")
+  const [cartLength,setCartLength] = useState(0)
   const final = {
     userName,
     setuserName,
     cartDocumentId,
-    setCartDocumentId
+    setCartDocumentId,
+    cartLength,
+    setCartLength
   };
   return (
     <CourseContext.Provider value={final}>{children}</CourseContext.Provider>
