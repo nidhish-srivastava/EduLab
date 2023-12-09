@@ -55,9 +55,9 @@ function Home() {
       <h3 style={{textAlign : "center",marginTop:"1rem",fontFamily : "Montserrat,sans-serif"}}>{searchParam.get("searchUserParam")}</h3>
       <div style={{width : "80%",margin : "0 auto"}}>
         {
-          loading && <div style={{width : "80%",margin :"4rem auto"}}>
+          loading ? <div style={{width : "80%",margin :"4rem auto"}}>
             <Skeleton count={5}/>
-            </div>
+            </div> : null
         }
         </div>
       <div className="courses-container">

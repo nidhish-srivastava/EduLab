@@ -64,7 +64,7 @@ const authSchema = new Schema<iAuth>({
   // boughtCourses : {type : [Object],ref : "Course"}
   boughtCourses : [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
   // {type : Schema.Types.ObjectId,ref : "Course",default : []}
-});
+},{timestamps : true});
 
 const courseSchema = new Schema<iCourse>({
   // authId : {type : Schema.Types.ObjectId,ref : "Auth",required : true},
@@ -75,7 +75,7 @@ const courseSchema = new Schema<iCourse>({
   imageLink: { type: String, required: true },
   // published : {type : Boolean},
   // category: { type: String, required: true },
-});
+},{timestamps : true});
 
 const cartSchema = new Schema<iCart>({
   username: { type: String, required: true },
@@ -85,7 +85,7 @@ const cartSchema = new Schema<iCart>({
       quantity: { type: Number, default: 0 },
     },
   ],
-});
+},{timestamps : true});
 
 // const businessRegisterSchema = new Schema<iBusinessRegister>({});
 

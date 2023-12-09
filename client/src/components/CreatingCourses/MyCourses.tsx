@@ -11,6 +11,7 @@ export type   courseType = {
   price : number | string
   _id?: number;
   author?: string;
+  createdAt?:string
 };
 
 function MyCourses() {

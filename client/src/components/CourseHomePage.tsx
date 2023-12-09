@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { baseUrl } from "../utils";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { dateFormatter } from "./CourseResultCard";
 
 export const fetchCoursePromise = async (
   courseId: string | undefined
@@ -133,6 +134,9 @@ const CourseHomePage = () => {
         <div>
           <h1>{courseObject?.title}</h1>
           <p>{courseObject?.description}</p>
+          <h5 style={{textAlign : "right"}}>
+          {dateFormatter(courseObject?.createdAt as Date | string | number)}
+          </h5>
         </div>
         <div>
           <h2>&#8377;{courseObject?.price}</h2>
