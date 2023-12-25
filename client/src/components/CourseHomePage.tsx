@@ -5,8 +5,8 @@ import { courseType } from "./CreatingCourses/MyCourses";
 import { removeFromCartPromise } from "./Cart/Cart";
 import toast, { Toaster } from "react-hot-toast";
 import { baseUrl } from "../utils";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { dateFormatter } from "./CourseResultCard";
 
 export const fetchCoursePromise = async (
@@ -22,7 +22,7 @@ const CourseHomePage = () => {
   const final = useCourseContext();
   const [courseObject, setCourseObject] = useState<courseType>();
   const [check, setCheck] = useState(false);
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [checkBought, setCheckBought] = useState(false);
 
   const loggedInUserCartCheckPromise = async (): Promise<boolean> => {
@@ -51,7 +51,6 @@ const CourseHomePage = () => {
         toast.error(data.msg);
       }
       if (response.status == 200) {
-        
         toast.success(data.msg);
       }
       setCheck(true);
@@ -73,9 +72,9 @@ const CourseHomePage = () => {
       return;
     }
     const checkIfBoughtResult = await checkIfBought(final?.userName);
-    if(checkIfBoughtResult.message==true) {
-      setCheckBought(true)
-      return toast.error("Course already bought")
+    if (checkIfBoughtResult.message == true) {
+      setCheckBought(true);
+      return toast.error("Course already bought");
     }
     sessionStorage.setItem("bill", JSON.stringify(courseObject));
     navigate("/checkout");
@@ -94,76 +93,81 @@ const CourseHomePage = () => {
 
   useEffect(() => {
     const fetchCartItemsHandler = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         const fetchCourseResult = await fetchCoursePromise(courseId);
         setCourseObject(fetchCourseResult);
-
-        const loggedInUserCartCheckResult =
-          await loggedInUserCartCheckPromise();
-        setCheck(loggedInUserCartCheckResult);
         
-        const checkIfBoughtResult = await checkIfBought(final?.userName);
-        setCheckBought(checkIfBoughtResult.message);
-        setLoading(false)
-      } catch (error) {
-        setLoading(false)
-        console.error(error);
-      }
+        if(final?.userName.length??0 > 1){
+          try {
+            const loggedInUserCartCheckResult =
+              await loggedInUserCartCheckPromise();
+            setCheck(loggedInUserCartCheckResult);
+            const checkIfBoughtResult = await checkIfBought(final?.userName);
+            setCheckBought(checkIfBoughtResult.message);
+          } catch (error) {
+            
+          }
+        }
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          console.error(error);
+        }
     };
     fetchCartItemsHandler();
-  }, []);
-
+  }, [final?.userName]);
 
   //* Now we need to create api which checks wether item present inside cart or not
 
   return (
     <>
-    {
-      loading ? 
-      <div style={{width : "80%",margin :"4rem auto"}}>
-        <Skeleton count={5}/> 
+      {loading ? (
+        <div style={{ width: "80%", margin: "4rem auto" }}>
+          <Skeleton count={5} />
         </div>
-        : 
-    <div className="individual-course-card-home-page">
-      <Toaster />
-      <div className="image-wrapper">
-        <img src={courseObject?.imageLink} alt="" loading="lazy" />
-      </div>
-      <div className="right-side">
-        <div>
-          <h1>{courseObject?.title}</h1>
-          <p>{courseObject?.description}</p>
-          <h5 style={{textAlign : "right"}}>
-          {dateFormatter(courseObject?.createdAt as Date | string | number)}
-          </h5>
-        </div>
-        <div>
-          <h2>&#8377;{courseObject?.price}</h2>
-          {final?.userName != courseObject?.author && (
-            <div className="buy-btn-row">
-              {
-                checkBought ? 
-              <button>Course purchased</button>
-              :
-              <>
-              <button onClick={() => buy(courseObject)}>Buy Now</button>
-              {!check ? (
-                <button onClick={addToCart}>Add to cart</button>
-                ) : (
-                  <button onClick={() => removeFromCart(courseObject?._id)}>
-                  Remove from Cart
-                  </button>
-                  )}
-                  </>
-}
+      ) : (
+        <div className="individual-course-card-home-page">
+          <Toaster />
+          <div className="image-wrapper">
+            <img src={courseObject?.imageLink} alt="" loading="lazy" />
+          </div>
+          <div className="right-side">
+            <div>
+              <h1>{courseObject?.title}</h1>
+              <p>{courseObject?.description}</p>
+              <h5 style={{ textAlign: "right" }}>
+                {dateFormatter(
+                  courseObject?.createdAt as Date | string | number
+                )}
+              </h5>
             </div>
-          ) 
-          }
+            <div>
+              <h2>&#8377;{courseObject?.price}</h2>
+              {final?.userName != courseObject?.author ? (
+                <div className="buy-btn-row">
+                  {checkBought ? (
+                    <button>Course purchased</button>
+                  ) : (
+                    <>
+                      <button onClick={() => buy(courseObject)}>Buy Now</button>
+                      {!check ? (
+                        <button onClick={addToCart}>Add to cart</button>
+                      ) : (
+                        <button
+                          onClick={() => removeFromCart(courseObject?._id)}
+                        >
+                          Remove from Cart
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    }
+      )}
     </>
   );
 };
