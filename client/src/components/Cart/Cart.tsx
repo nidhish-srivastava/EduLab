@@ -45,14 +45,17 @@ function Cart() {
     }
     
     useEffect(()=>{
-      const fetchCartItemsHandler = async() =>{
-          const data = await fetchCartItems(final?.userName)
-          final?.setCartLength(data.cartItems.length)
-          setCartItemsArray(data?.cartItems)
-          setCartDocumentId(data.cart._id)
+      if(final?.userName.length??0>1){
+        const username = final?.userName
+        const fetchCartItemsHandler = async() =>{
+            const data = await fetchCartItems(username)
+            final?.setCartLength(data.cartItems.length)
+            setCartItemsArray(data?.cartItems)
+            setCartDocumentId(data.cart._id)
+        }
+        fetchCartItemsHandler()
       }
-      fetchCartItemsHandler()
-    },[])
+    },[final?.userName])
     
   return (
     <main className="cart-items-container">

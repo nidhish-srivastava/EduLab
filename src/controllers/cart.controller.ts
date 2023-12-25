@@ -20,7 +20,7 @@ export const checkCourseInCart = async(req:Request,res:Response) =>{
   else res.json(true)
 }
 
-export const purchase = async (req: Request, res: Response) => {
+export const addToCart = async (req: Request, res: Response) => {
   const { courseId } = req.params;
   const { username } = req.body;
   try {
@@ -70,9 +70,14 @@ export const remove = async (req: Request, res: Response) => {
 
 export const getCartItems = async (req: Request, res: Response) => {
   const { username } = req.params;
-  const cart = await Cart.findOne({ user: username }).populate(
-    "courses.course"
-  );
+  const cart = await Cart.findOne({username : username }).populate(
+    {
+      path : "courses.course",
+      select : "price author title description price imageLink",
+      model : "Course"
+    }
+  ).exec();
+  
   // Extract cartItems from the cart and send the response
   const cartItems = cart?.courses.map((item) => item.course);
   res.json({ cartItems, cart });
